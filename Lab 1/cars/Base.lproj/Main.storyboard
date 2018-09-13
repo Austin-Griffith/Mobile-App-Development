@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina3_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="cars" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pick your favorite! " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOP-OU-4pa">
+                                <rect key="frame" x="35" y="20" width="250" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="7DZ-cp-wf6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <color key="textColor" red="1" green="0.17862147833640629" blue="0.06302810223880162" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cars&amp;trucks" translatesAutoresizingMaskIntoConstraints="NO" id="aYx-iV-YIl">
+                                <rect key="frame" x="22" y="169" width="276" height="274"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="274" id="QIo-jo-o0f"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="45" translatesAutoresizingMaskIntoConstraints="NO" id="edi-QS-tdl">
+                                <rect key="frame" x="80" y="80" width="161" height="46"/>
+                                <subviews>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yNV-hf-tnS">
+                                        <rect key="frame" x="0.0" y="0.0" width="66" height="46"/>
+                                        <color key="backgroundColor" red="0.12525017220000001" green="1" blue="0.002136267949" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <state key="normal" title="Truck"/>
+                                        <connections>
+                                            <action selector="chooseArt:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tq9-RG-AAp"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YXX-Bo-k3T">
+                                        <rect key="frame" x="111" y="0.0" width="50" height="46"/>
+                                        <color key="backgroundColor" red="0.12525017215395273" green="1" blue="0.0021362679490916081" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <state key="normal" title="Car "/>
+                                        <connections>
+                                            <action selector="chooseArt:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7WF-4Y-ncG"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="nOP-OU-4pa" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="2oL-sT-NRy"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="aYx-iV-YIl" secondAttribute="bottom" constant="37" id="4il-UA-qKc"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="aYx-iV-YIl" secondAttribute="bottom" constant="37" id="5dO-oF-k8p"/>
+                            <constraint firstItem="nOP-OU-4pa" firstAttribute="centerX" secondItem="edi-QS-tdl" secondAttribute="centerX" id="D3U-Nx-PvA"/>
+                            <constraint firstItem="aYx-iV-YIl" firstAttribute="centerX" secondItem="edi-QS-tdl" secondAttribute="centerX" id="Gh4-Jr-5UZ"/>
+                            <constraint firstItem="aYx-iV-YIl" firstAttribute="top" secondItem="edi-QS-tdl" secondAttribute="bottom" constant="43" id="XZc-mc-GLg"/>
+                            <constraint firstItem="aYx-iV-YIl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="g7r-kc-hFU"/>
+                            <constraint firstItem="aYx-iV-YIl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="22" id="jVW-Zk-CEN"/>
+                            <constraint firstItem="aYx-iV-YIl" firstAttribute="top" secondItem="nOP-OU-4pa" secondAttribute="bottom" constant="97" id="nVT-kZ-Hd9"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="artImage1" destination="aYx-iV-YIl" id="Ow4-ft-2yH"/>
+                        <outlet property="car" destination="YXX-Bo-k3T" id="UKc-Pm-t6K"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-81" y="131"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="cars&amp;trucks" width="470" height="470"/>
+    </resources>
+</document>
