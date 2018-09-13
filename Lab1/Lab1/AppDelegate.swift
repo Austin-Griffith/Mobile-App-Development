@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  cars
+//  Lab1
 //
-//  Created by Austin Griffith on 9/4/18.
+//  Created by Austin Griffith on 9/11/18.
 //  Copyright © 2018 Austin Griffith. All rights reserved.
 //
 
