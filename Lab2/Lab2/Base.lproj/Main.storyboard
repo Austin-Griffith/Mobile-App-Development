@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +13,116 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Lab2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="lXQ-AF-mDy">
+                                <rect key="frame" x="66" y="60" width="253" height="363"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Fdr-lz-1HN">
+                                        <rect key="frame" x="0.0" y="0.0" width="253" height="363"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="8Ar-zG-McU">
+                                                <rect key="frame" x="64" y="0.0" width="189" height="194"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dogStart" translatesAutoresizingMaskIntoConstraints="NO" id="9n2-uF-9sA">
+                                                        <rect key="frame" x="0.0" y="0.0" width="189" height="150"/>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What kind of dog?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MR1-Qq-MUm">
+                                                        <rect key="frame" x="0.0" y="165" width="189" height="29"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="IVX-Zb-5IJ">
+                                                <rect key="frame" x="0.0" y="214" width="253" height="149"/>
+                                                <subviews>
+                                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="0oB-df-KSV">
+                                                        <rect key="frame" x="50" y="0.0" width="153" height="29"/>
+                                                        <segments>
+                                                            <segment title="Good Dog"/>
+                                                            <segment title="Bad Dog"/>
+                                                        </segments>
+                                                        <connections>
+                                                            <action selector="changeInfo:" destination="BYZ-38-t0r" eventType="valueChanged" id="Oom-wp-Ykr"/>
+                                                        </connections>
+                                                    </segmentedControl>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="iHR-nK-vHw">
+                                                        <rect key="frame" x="22" y="58" width="209" height="31"/>
+                                                        <subviews>
+                                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SYj-Xk-97E">
+                                                                <rect key="frame" x="0.0" y="0.0" width="51" height="31"/>
+                                                                <connections>
+                                                                    <action selector="updateCaps:" destination="BYZ-38-t0r" eventType="valueChanged" id="ush-fv-KZe"/>
+                                                                </connections>
+                                                            </switch>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Capitalization" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1T8-7K-0aj">
+                                                                <rect key="frame" x="79" y="0.0" width="130" height="31"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="CTt-Oh-ZWA">
+                                                        <rect key="frame" x="0.0" y="119" width="253" height="30"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rgH-xf-ats">
+                                                                <rect key="frame" x="0.0" y="0.0" width="24" height="30"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="16" minValue="6" maxValue="24" translatesAutoresizingMaskIntoConstraints="NO" id="gxo-yN-7bY">
+                                                                <rect key="frame" x="42" y="0.0" width="213" height="31"/>
+                                                                <connections>
+                                                                    <action selector="changeFontSize:" destination="BYZ-38-t0r" eventType="valueChanged" id="vQi-Zn-929"/>
+                                                                </connections>
+                                                            </slider>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="CTt-Oh-ZWA" firstAttribute="leading" secondItem="IVX-Zb-5IJ" secondAttribute="leading" id="eNd-1G-o0o"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="IVX-Zb-5IJ" firstAttribute="leading" secondItem="Fdr-lz-1HN" secondAttribute="leading" id="JYc-Is-eoY"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Fdr-lz-1HN" firstAttribute="leading" secondItem="lXQ-AF-mDy" secondAttribute="leading" id="ucx-jz-CrM"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lXQ-AF-mDy" secondAttribute="trailing" constant="56" id="McB-OQ-kXd"/>
+                            <constraint firstItem="lXQ-AF-mDy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="66" id="vQ4-rk-Na7"/>
+                            <constraint firstItem="lXQ-AF-mDy" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="zC7-Yv-eej"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="capitalSwitch" destination="SYj-Xk-97E" id="2Pb-U3-A4W"/>
+                        <outlet property="dogImage" destination="9n2-uF-9sA" id="7mg-lS-3xl"/>
+                        <outlet property="fontSizeBanner" destination="rgH-xf-ats" id="UzC-pz-eED"/>
+                        <outlet property="imageSwitch" destination="0oB-df-KSV" id="Lng-nj-rD5"/>
+                        <outlet property="titleBanner" destination="MR1-Qq-MUm" id="lpU-tY-hWK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="140" y="133.5832083958021"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="dogStart" width="150" height="150"/>
+    </resources>
 </document>
