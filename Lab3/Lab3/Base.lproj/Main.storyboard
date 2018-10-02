@@ -21,11 +21,11 @@
                         <sections>
                             <tableViewSection id="yNI-L8-4Te">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="245" id="9NN-dY-ypR">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="245"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="254" id="9NN-dY-ypR">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="254"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9NN-dY-ypR" id="auo-Z2-PBq">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="244.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="253.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currency Converter " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LDH-JX-vWR">
@@ -52,7 +52,7 @@
                                                     </constraints>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="light"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" keyboardAppearance="alert" returnKeyType="done"/>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fVV-B9-Zb1">
                                                     <rect key="frame" x="119" y="165" width="137" height="30"/>
@@ -63,7 +63,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <state key="normal" title="Convert"/>
                                                     <connections>
-                                                        <action selector="convertButtonPressed:" destination="fzQ-rf-dUU" eventType="touchUpInside" id="I96-cQ-Aca"/>
+                                                        <action selector="convertDollarAmount:" destination="fzQ-rf-dUU" eventType="touchUpInside" id="iUE-2I-LRA"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -93,7 +93,7 @@
                             <tableViewSection id="564-4H-Vjw">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="hbJ-Nc-TaY">
-                                        <rect key="frame" x="0.0" y="245" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="254" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hbJ-Nc-TaY" id="EHF-p7-eVL">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -130,11 +130,11 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.12525017220000001" green="1" blue="0.002136267949" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="dNV-2O-1eW">
-                                        <rect key="frame" x="0.0" y="289" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="358" id="dNV-2O-1eW">
+                                        <rect key="frame" x="0.0" y="298" width="375" height="358"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dNV-2O-1eW" id="lFD-oP-HM7">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="357.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Peso" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bkD-rV-wDy">
@@ -169,24 +169,6 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.12525017220000001" green="1" blue="0.002136267949" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="drQ-U5-Lhn">
-                                        <rect key="frame" x="0.0" y="333" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="drQ-U5-Lhn" id="aLU-nR-5QM">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.12525017220000001" green="1" blue="0.002136267949" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="269" id="atQ-nt-d6k">
-                                        <rect key="frame" x="0.0" y="377" width="375" height="269"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="atQ-nt-d6k" id="GEF-ih-03W">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="268.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.12525017220000001" green="1" blue="0.002136267949" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -196,9 +178,10 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="dollarAmountTextField" destination="sYi-WW-b5v" id="egy-z1-kuw"/>
+                        <outlet property="dollarAmountTextField" destination="sYi-WW-b5v" id="MuA-my-x0L"/>
                         <outlet property="euroConversion" destination="eUi-SK-Zey" id="XMs-LP-FAb"/>
                         <outlet property="pesoConversion" destination="MMV-Eo-nJv" id="6F1-kA-Pbu"/>
+                        <outlet property="tableView" destination="IcH-sh-deI" id="b4s-iP-yoz"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RPV-AG-QgP" userLabel="First Responder" sceneMemberID="firstResponder"/>

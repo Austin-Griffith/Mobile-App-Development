@@ -10,21 +10,17 @@ import UIKit
 
 class ConversionTableViewController: UITableViewController, UITextFieldDelegate {
 
+
     @IBOutlet weak var dollarAmountTextField: UITextField!
-    
     @IBOutlet weak var euroConversion: UILabel!
     @IBOutlet weak var pesoConversion: UILabel!
     
-    // button for return key on number pad
-    //let button = UIButton(type: UIButtonType.custom)
-    
-    
-    @IBAction func convertButtonPressed(_ sender: Any) {
+    @IBAction func convertDollarAmount(_ sender: UIButton) {
         //currency conversion function
         let dollarAmount = Double(dollarAmountTextField.text!)
         
         //converting to euro
-        let euro = dollarAmount! * 1.16
+        let euro = dollarAmount! * 0.86
         euroConversion.text = String(euro)
         
         //converting to peso
@@ -34,16 +30,32 @@ class ConversionTableViewController: UITableViewController, UITextFieldDelegate 
     
     
     override func viewDidLoad() {
+        dollarAmountTextField.delegate = self
+        tableView.delegate = self
+        tableView.dataSource = self
         super.viewDidLoad()
-        
-        //setting custom return button on keypad input to textField
-//        button.setTitle("Return", for: UIControlState.normal)
-//        button.setTitleColor(UIColor.black, for: UIControlState.normal)
-//        button.frame = CGRect(0,163,186,53)
-//        button.adjustsImageWhenHighlighted = false
-//        button.addTarget(self, action: Selector(("Done")), for: UIControlEvents.touchUpInside)
-
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -51,16 +63,16 @@ class ConversionTableViewController: UITableViewController, UITextFieldDelegate 
     }
 
     // MARK: - Table view data source
+//
+//    override func numberOfSections(in tableView: UITableView) -> Int {
+//        // #warning Incomplete implementation, return the number of sections
+//        return 2
+//    }
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }
+//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        // #warning Incomplete implementation, return the number of rows
+//        return 0
+//    }
 
 
 
