@@ -8,6 +8,20 @@
 
 import UIKit
 
+extension ConversionTableViewController{
+    
+    func hideKeyboard() {
+        let tap:UITapGestureRecognizer = UITapGestureRecognizer( target: self, action: #selector(dismissKeyboard) )
+        view.addGestureRecognizer(tap)
+        
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+}
+
 class ConversionTableViewController: UITableViewController, UITextFieldDelegate {
 
 
@@ -18,14 +32,15 @@ class ConversionTableViewController: UITableViewController, UITextFieldDelegate 
     @IBAction func convertDollarAmount(_ sender: UIButton) {
         //currency conversion function
         let dollarAmount = Double(dollarAmountTextField.text!)
-        
         //converting to euro
         let euro = dollarAmount! * 0.86
         euroConversion.text = String(euro)
-        
         //converting to peso
         let peso = dollarAmount! * 0.053
         pesoConversion.text = String(peso)
+        
+        // if condition to alert if something other than a number was the input
+        
     }
     
     
@@ -34,6 +49,8 @@ class ConversionTableViewController: UITableViewController, UITextFieldDelegate 
         tableView.delegate = self
         tableView.dataSource = self
         super.viewDidLoad()
+        
+        self.hideKeyboard()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -41,7 +58,10 @@ class ConversionTableViewController: UITableViewController, UITextFieldDelegate 
         return true
     }
     
-        
+//    func touchesBegan(_ touches: Set<UITouch>, with event: UITextField?) {
+//        self.view.endEditing(true)
+//    }
+    
     
     
     
