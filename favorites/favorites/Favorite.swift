@@ -9,11 +9,10 @@
 import Foundation
 
 
-class Favorite {
+class Favorite : codeable {
     
     var favBook: String?
     var favAuthor: String?
-    
-    
+
     
 }

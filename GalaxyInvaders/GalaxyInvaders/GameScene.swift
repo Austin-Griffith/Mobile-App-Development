@@ -23,8 +23,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var player:SKSpriteNode!
     
     var gameTimer:Timer!
-//    var possibleEnemies = ["emeny1", "enemy2", "enemy3"]
-    var possibleEnemies = ["alien", "alien2", "alien3"]
+    var possibleEnemies = ["ufo1", "ufo3"]
     
     //bit masks to calculate when an enemy is hit with a bullet from player
     var alienCategory:UInt32 = 0x1 << 1
@@ -62,7 +61,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         galaxyInSpace.zPosition = -1
         
-        player = SKSpriteNode(imageNamed: "spaceShip")
+        player = SKSpriteNode(imageNamed: "spaceShipBlue")
         
         //setting the position of the score label to top left conner of game frame
         player.position = CGPoint(x: self.frame.size.width / 9, y: player.size.height / 5 - 500 )
@@ -122,6 +121,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        //calling the fire bullets function whent the user touches the screen
         fireBullets()
     }
     
@@ -153,20 +153,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func didBegin(_ contact: SKPhysicsContact) {
         
-        var firstBody:SKPhysicsBody
-        var secondBody:SKPhysicsBody
+        var movingFirstBody:SKPhysicsBody
+        var movingSecondBody:SKPhysicsBody
         
         if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
-            firstBody = contact.bodyA
-            secondBody = contact.bodyB
+            movingFirstBody = contact.bodyA
+            movingSecondBody = contact.bodyB
         } else {
-            firstBody = contact.bodyB
-            secondBody = contact.bodyA
+            movingFirstBody = contact.bodyB
+            movingSecondBody = contact.bodyA
         }
         
         //bitwise & comparison to see which body is player and which body is the bullet
-        if (firstBody.categoryBitMask & playerBulletCategory) != 0 && (secondBody.categoryBitMask & alienCategory) != 0  {
-            bulletDidCollideWithAlien(bullet: firstBody.node as! SKSpriteNode, alien: secondBody.node as! SKSpriteNode)
+        if (movingFirstBody.categoryBitMask & playerBulletCategory) != 0 && (movingSecondBody.categoryBitMask & alienCategory) != 0  {
+            bulletDidCollideWithAlien(bullet: movingFirstBody.node as! SKSpriteNode, alien: movingSecondBody.node as! SKSpriteNode)
             
         }
         

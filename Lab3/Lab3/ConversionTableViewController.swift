@@ -63,7 +63,8 @@ class ConversionTableViewController: UITableViewController, UITextFieldDelegate 
         self.hideKeyboard()
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+    {
         let allowedInput = CharacterSet.decimalDigits
         let inputSet = CharacterSet(charactersIn: string)
         return allowedInput.isSuperset(of: inputSet)
