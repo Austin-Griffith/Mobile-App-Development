@@ -51,7 +51,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         galaxyInSpace = SKEmitterNode(fileNamed: "GalaxyBackground")
         
         //declare position
-        galaxyInSpace.position = CGPoint(x:0, y:1400)
+        galaxyInSpace.position = CGPoint(x:0, y:1000)
         
         //speed up the simulation so no gap from blank to stars
         galaxyInSpace.advanceSimulationTime(12)
@@ -133,6 +133,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //moving bullet up from  initial position of player node
         bulletNode.position.y += 5
+        
         //add physicbody to bullet
         bulletNode.physicsBody = SKPhysicsBody(circleOfRadius: bulletNode.size.width / 2)
         bulletNode.physicsBody?.isDynamic = true
@@ -142,6 +143,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bulletNode.physicsBody?.usesPreciseCollisionDetection = true
         
         self.addChild(bulletNode)
+        //setting speed of how long you see the bullet
         let animationDuration:TimeInterval = 0.8
         var actionArray = [SKAction]()
         
@@ -153,9 +155,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func didBegin(_ contact: SKPhysicsContact) {
         
+        //physics bodies for player and enemy
         var movingFirstBody:SKPhysicsBody
         var movingSecondBody:SKPhysicsBody
         
+        //checking contact between bullet and enemy
         if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
             movingFirstBody = contact.bodyA
             movingSecondBody = contact.bodyB
@@ -173,19 +177,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func bulletDidCollideWithAlien(bullet: SKSpriteNode, alien: SKSpriteNode)  {
+        //adding explosion feature when
         let explosion = SKEmitterNode(fileNamed: "Explosion")!
         explosion.position = alien.position
-        self.addChild(explosion)
         
+        //adding sound to explosion when colloision happens
+        self.addChild(explosion)
         self.run(SKAction.playSoundFileNamed("bigBang.mp3", waitForCompletion: false))
         
         bullet.removeFromParent()
         alien.removeFromParent()
         
+        //calls the SKAction with sound for 2 seconds
         self.run( SKAction.wait(forDuration: 2) ) {
             explosion.removeFromParent()
         }
         
+        //add to scroe when known an enemy is hit
         score += 2
         
     }
