@@ -18,10 +18,15 @@ import Foundation
 
 class TodoViewController: UITableViewController {
 
-    var items = [Items]()
+//    var items = [Items]()
+    // initialize empty array of items 
+    var items: [Items] = []
     
      let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    
+    //public var context: NSManagedObjectContext?
+    //public var items: [Items] = []
      //let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     
@@ -83,15 +88,17 @@ class TodoViewController: UITableViewController {
         //let item = NSEntityDescription.insertNewObject(forEntityName: "ToDoList", into: managedObjectContext) as! ToDoList
 
         var textField = UITextField()
+        
+        //create alert for to do input
         var alert = UIAlertController(title: "Add New Item", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "Save Item", style: .default) { (action) in
-
+            //save to array of Items
             let newItem = Items(context: self.context)
             newItem.name = textField.text!
             self.items.append(newItem)
             self.saveToDoItems()
         }
-
+        
         alert.addAction(action)
         alert.addTextField{ (field) in
             textField = field
@@ -110,7 +117,7 @@ class TodoViewController: UITableViewController {
         catch {
             print("Error adding to do item \(error)")
         }
-        
+        //must reload table every time something is saved
         tableView.reloadData()
     }
     
@@ -129,6 +136,22 @@ class TodoViewController: UITableViewController {
         catch {
             print("Error fetching data from context \(error)")
         }
+        
+        
+    
+        // Load data from  coredata
+//        public func loadData()->Bool{
+//            let request:NSFetchRequest<Items> = Items.fetchRequest()
+//            do{
+//                if let context = context{
+//                    items = try context.fetch(request)
+//                    return true
+//                }
+//            }catch{
+//                print("Error fetching data")
+//            }
+//            return false
+//        }///end example
         
         tableView.reloadData()
         
