@@ -136,8 +136,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func fireBullets() {
         //adding game sound for fired bullet
-        self.run(SKAction.playSoundFileNamed("torpedo.mp3", waitForCompletion: false))
-        let bulletNode = SKSpriteNode(imageNamed: "torpedo")
+        self.run(SKAction.playSoundFileNamed("laserFire.mp3", waitForCompletion: false))
+        let bulletNode = SKSpriteNode(imageNamed: "bullet")
         bulletNode.position = player.position
         
         //moving bullet up from  initial position of player node
@@ -213,7 +213,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func bulletDidCollideWithAlien(bullet: SKSpriteNode, alien: SKSpriteNode)  {
         //adding explosion feature when
-        let explosion = SKEmitterNode(fileNamed: "Explosion")!
+        let explosion = SKEmitterNode(fileNamed: "bulletExplosion")!
         explosion.position = alien.position
         
         self.addChild(explosion)
