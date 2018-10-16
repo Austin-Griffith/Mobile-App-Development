@@ -41,8 +41,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //SKLabelNodes used to display content to the game view
     var scoreBanner:SKLabelNode?
     
-    var motionManager = CMMotionManager()
-    var xAcceleration:CGFloat = 0
+// initialize variable for CoreMotion Library for tilt control of player
+//    var motionManager = CMMotionManager()
+//    var xAcceleration:CGFloat = 0
     
     
     //keeping track of score from count of bulletDidCollideWithAlien function
@@ -90,7 +91,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.addChild(scoreBanner!)
         
-        gameTimer = Timer.scheduledTimer(timeInterval: 0.75, target: self, selector: #selector(addEmeny), userInfo: nil, repeats: true)
+        gameTimer = Timer.scheduledTimer(timeInterval: 0.75, target: self, selector: #selector(addEnemy), userInfo: nil, repeats: true)
         
 //motionManger used with acceleration to control tilting of phone to controlm ovement of the player object
 //        motionManager.accelerometerUpdateInterval = 0.2
@@ -104,13 +105,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         } // end of didMove function
     
-    @objc func addEmeny() {
+    @objc func addEnemy() {
         possibleEnemies = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: possibleEnemies) as! [String]
         //always will choose a random position in the array of possibleEnemies
         let alien = SKSpriteNode(imageNamed: possibleEnemies[0])
+        //distributes enemies between 0 and 414 coordinates
         let randomAlienPosition = GKRandomDistribution(lowestValue: 0, highestValue: 414)
         let position = CGFloat(randomAlienPosition.nextInt())
         
+        //attaching values of position and physics body to alien object 
         alien.position = CGPoint(x: position, y: self.frame.height + alien.size.height)
         alien.physicsBody = SKPhysicsBody(rectangleOf: alien.size)
         alien.physicsBody?.isDynamic = true
@@ -120,6 +123,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         alien.physicsBody?.collisionBitMask = 0
         
         self.addChild(alien)
+        //initialize time for sponing enemies 
         let animationDuration:TimeInterval = 3
         var actionArray = [SKAction]()
         
