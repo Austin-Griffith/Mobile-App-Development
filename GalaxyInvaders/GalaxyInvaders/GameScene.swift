@@ -15,6 +15,15 @@ import GameplayKit
 import CoreMotion
 //https://developer.apple.com/documentation/coremotion
 
+//  SOURCES USED IN PROJECT ///
+//https://www.youtube.com/watch?v=Y38YvERodWQ
+//https://www.youtube.com/watch?v=mvlwZs2ehLU
+//https://www.youtube.com/watch?v=cJy61bOqQpg
+//https://www.youtube.com/watch?v=hOYWSPjdyUw
+//https://code.tutsplus.com/tutorials/create-space-invaders-with-swift-and-sprite-kit-introducing-sprite-kit--cms-23341
+
+
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
@@ -36,7 +45,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var xAcceleration:CGFloat = 0
     
     
-
+    //keeping track of score from count of bulletDidCollideWithAlien function
     var score:Int = 0 {
         didSet {
             scoreBanner?.text = "Score: \(score)"
@@ -72,10 +81,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.gravity = CGVector(dx: 0 , dy: 0)
         self.physicsWorld.contactDelegate = self
         
-        
         scoreBanner = SKLabelNode(text: "Score: 0")
         scoreBanner?.position = CGPoint(x: self.frame.size.width / 15 - 250, y: self.size.height / 5 + 315 )
-        scoreBanner?.fontName = "AmericanTypewriter-Bold"
+        scoreBanner?.fontName = "AmericanTypewriter-Bold"   //taken from apple UI fonts
         scoreBanner?.fontSize = 75
         scoreBanner?.fontColor = UIColor.red
         score = 0
@@ -89,7 +97,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
             if let accelerometerData = data {
                 let acceleration = accelerometerData.acceleration
-                self.xAcceleration = CGFloat(acceleration.x) * 0.75 + self.xAcceleration
+                self.xAcceleration = CGFloat(acceleration.x) * 0.75 + self.xAcceleration * 0.25
             }
         }
         
@@ -124,6 +132,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //calling the fire bullets function whent the user touches the screen
         fireBullets()
     }
+    
     
     func fireBullets() {
         //adding game sound for fired bullet
@@ -160,10 +169,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         var movingSecondBody:SKPhysicsBody
         
         //checking contact between bullet and enemy
-        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
+        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask
+        {
             movingFirstBody = contact.bodyA
             movingSecondBody = contact.bodyB
-        } else {
+        } else
+        {
             movingFirstBody = contact.bodyB
             movingSecondBody = contact.bodyA
         }
@@ -176,13 +187,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
+//    override func didSimulatePhysics() {
+//
+//        player.position.x += xAcceleration * 50
+//        if (player.position.x < -30)
+//        {
+//            player.position = CGPoint(x: self.size.width + 25, y: player.position.y )
+//        }
+//        else if (player.position.x > self.size.width + 25 )
+//        {
+//            player.position = CGPoint(x: -25, y: player.position.y )
+//
+//        }
+//    }
+    
+    // enables touch dragging of the player object
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch: AnyObject in touches {
+            let touchOfPoint = touch.location(in: self)
+            let previousPointOfTouch = touch.previousLocation(in: self)
+            let amountDragged = touchOfPoint.x - previousPointOfTouch.x
+            player.position.x += amountDragged
+        }
+    }
+    
     func bulletDidCollideWithAlien(bullet: SKSpriteNode, alien: SKSpriteNode)  {
         //adding explosion feature when
         let explosion = SKEmitterNode(fileNamed: "Explosion")!
         explosion.position = alien.position
         
-        //adding sound to explosion when colloision happens
         self.addChild(explosion)
+         //adding sound to explosion when colloision happens
         self.run(SKAction.playSoundFileNamed("bigBang.mp3", waitForCompletion: false))
         
         bullet.removeFromParent()
@@ -194,7 +229,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         //add to scroe when known an enemy is hit
-        score += 2
+        score += 1
         
     }
 
@@ -202,6 +237,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func update(_ currentTime: TimeInterval)
     {
         // Called before each frame is rendered
+        //standard game loop rendering at 60 frames per second
     }
     
     
