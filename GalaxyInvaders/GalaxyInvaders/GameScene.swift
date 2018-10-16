@@ -69,7 +69,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(galaxyInSpace)
         
         galaxyInSpace.zPosition = -1
-        
         player = SKSpriteNode(imageNamed: "spaceShipBlue")
         
         //setting the position of the score label to top left conner of game frame
@@ -81,6 +80,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.gravity = CGVector(dx: 0 , dy: 0)
         self.physicsWorld.contactDelegate = self
         
+        //initialize the Score label to 0 and place it at the top left corner of the view
         scoreBanner = SKLabelNode(text: "Score: 0")
         scoreBanner?.position = CGPoint(x: self.frame.size.width / 15 - 250, y: self.size.height / 5 + 315 )
         scoreBanner?.fontName = "AmericanTypewriter-Bold"   //taken from apple UI fonts
@@ -92,16 +92,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         gameTimer = Timer.scheduledTimer(timeInterval: 0.75, target: self, selector: #selector(addEmeny), userInfo: nil, repeats: true)
         
-        motionManager.accelerometerUpdateInterval = 0.2
-        motionManager.startAccelerometerUpdates(to: OperationQueue.current!) { (data:CMAccelerometerData?, error:Error?) in
-
-            if let accelerometerData = data {
-                let acceleration = accelerometerData.acceleration
-                self.xAcceleration = CGFloat(acceleration.x) * 0.75 + self.xAcceleration * 0.25
-            }
-        }
+//motionManger used with acceleration to control tilting of phone to controlm ovement of the player object
+//        motionManager.accelerometerUpdateInterval = 0.2
+//        motionManager.startAccelerometerUpdates(to: OperationQueue.current!) { (data:CMAccelerometerData?, error:Error?) in
+//
+//            if let accelerometerData = data {
+//                let acceleration = accelerometerData.acceleration
+//                self.xAcceleration = CGFloat(acceleration.x) * 0.75 + self.xAcceleration * 0.25
+//            }
+//        }
         
-        }
+        } // end of didMove function
     
     @objc func addEmeny() {
         possibleEnemies = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: possibleEnemies) as! [String]
