@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  Lab4
 //
-//  Created by Austin Griffith on 10/11/18.
+//  Created by Austin Griffith on 10/16/18.
 //  Copyright © 2018 Austin Griffith. All rights reserved.
 //
 
@@ -13,25 +13,10 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
- //   let coreDataManager = CoreDataManager(modelName: "Items")
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
         // Override point for customization after application launch.
-        
-//        let managedObjectContext = coreDataManager.managedObjectContext
-//
-//        // Create Entity Description
-//        let entityDescription = NSEntityDescription.entity(forEntityName: "Items", in: managedObjectContext)
-//
-//        if let entityDescription = entityDescription
-//        {
-//            print(entityDescription.name ?? "No Name")
-//            print(entityDescription.properties)
-//        }
-        
         return true
     }
 
