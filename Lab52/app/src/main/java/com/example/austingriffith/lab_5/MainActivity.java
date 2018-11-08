@@ -22,7 +22,7 @@ public class MainActivity extends Activity {
         EditText name = findViewById(R.id.editText);
         String nameValue = name.getText().toString();
         TextView booText = findViewById(R.id.message);
-        booText.setText("Happy Halloween " + nameValue + "!");
+        booText.setText("Your favorite team is " + nameValue + "!");
         ImageView mlb = findViewById(R.id.imageView);
         mlb.setImageResource(R.drawable.mlb);
 

@@ -1,5 +1,7 @@
 <resources>
+
     <string name="app_name">Lab5</string>
-    <string name="boo">Boo</string>
+    <string name="boo">Change Text</string>
     <string name="name">Name</string>
+
 </resources>
