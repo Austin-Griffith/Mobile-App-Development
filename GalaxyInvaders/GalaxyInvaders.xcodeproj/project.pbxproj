@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5781FB5A216C465C0011F3A6 /* bulletExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5781FB59216C465C0011F3A6 /* bulletExplosion.sks */; };
+		57CCCF60219A35EA0068F30E /* bulletExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 57CCCF5F219A35EA0068F30E /* bulletExplosion.sks */; };
 		57CF12142176557D00C58ED6 /* laserFire.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 57CF12132176557D00C58ED6 /* laserFire.mp3 */; };
 		57FFE258216451D400D28800 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FFE257216451D400D28800 /* AppDelegate.swift */; };
 		57FFE25A216451D400D28800 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 57FFE259216451D400D28800 /* GameScene.sks */; };
@@ -23,7 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5781FB59216C465C0011F3A6 /* bulletExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = bulletExplosion.sks; path = ../../../Desktop/bulletExplosion.sks; sourceTree = "<group>"; };
+		57CCCF5F219A35EA0068F30E /* bulletExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = bulletExplosion.sks; path = ../../../Desktop/bulletExplosion.sks; sourceTree = "<group>"; };
 		57CF12132176557D00C58ED6 /* laserFire.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = laserFire.mp3; sourceTree = "<group>"; };
 		57FFE254216451D400D28800 /* GalaxyInvaders.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GalaxyInvaders.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57FFE257216451D400D28800 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -79,8 +79,8 @@
 				57FFE264216451D600D28800 /* Assets.xcassets */,
 				57FFE25B216451D400D28800 /* Actions.sks */,
 				57FFE2732164558F00D28800 /* FirePartical.sks */,
-				5781FB59216C465C0011F3A6 /* bulletExplosion.sks */,
 				57FFE277216456CB00D28800 /* GalaxyBackground.sks */,
+				57CCCF5F219A35EA0068F30E /* bulletExplosion.sks */,
 				57FFE26F2164556A00D28800 /* bigBang.mp3 */,
 				57CF12132176557D00C58ED6 /* laserFire.mp3 */,
 				57FFE269216451D600D28800 /* Info.plist */,
@@ -153,7 +153,7 @@
 				57FFE265216451D600D28800 /* Assets.xcassets in Resources */,
 				57FFE2742164558F00D28800 /* FirePartical.sks in Resources */,
 				57FFE278216456CB00D28800 /* GalaxyBackground.sks in Resources */,
-				5781FB5A216C465C0011F3A6 /* bulletExplosion.sks in Resources */,
+				57CCCF60219A35EA0068F30E /* bulletExplosion.sks in Resources */,
 				57FFE268216451D600D28800 /* LaunchScreen.storyboard in Resources */,
 				57FFE25C216451D400D28800 /* Actions.sks in Resources */,
 			);
