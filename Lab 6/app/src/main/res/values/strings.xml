@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Lab6</string>
+    <string-array name="gpaType">
+        <item>technical</item>
+        <item>overall</item>
+    </string-array>
+    <string name="GPA">GPA</string>
+    <string name="major">Major</string>
+
+</resources>
