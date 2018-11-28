@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">DenverHousingFinder</string>
+    <string name="title">Denver Housing Finder</string>
+    <string name="button">Find Housing Area</string>
+
+    <string-array name="interest">
+        <item>Post College Grad</item>
+        <item>Upper Class Living</item>
+        <item>Craft Beer and Art</item>
+        <item>Family Oriented</item>
+        <item>Directly Downtown</item>
+    </string-array>
+
+    <string name="denver_image">Denver View</string>
+
+    <string name="housing_suggestion">You should check this housing area in Denver!</string>
+</resources>
