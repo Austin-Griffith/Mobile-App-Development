@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5791111A21AF580000BCBA8D /* HomeScreen.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5791111921AF580000BCBA8D /* HomeScreen.sks */; };
 		57CCCF60219A35EA0068F30E /* bulletExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 57CCCF5F219A35EA0068F30E /* bulletExplosion.sks */; };
 		57CF12142176557D00C58ED6 /* laserFire.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 57CF12132176557D00C58ED6 /* laserFire.mp3 */; };
 		57FFE258216451D400D28800 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FFE257216451D400D28800 /* AppDelegate.swift */; };
@@ -23,6 +24,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5791111721AF577400BCBA8D /* bulletExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = bulletExplosion.sks; sourceTree = "<group>"; };
+		5791111821AF579C00BCBA8D /* bulletExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = bulletExplosion.sks; path = ../../../../Desktop/bulletExplosion.sks; sourceTree = "<group>"; };
+		5791111921AF580000BCBA8D /* HomeScreen.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = HomeScreen.sks; sourceTree = "<group>"; };
 		57CCCF5F219A35EA0068F30E /* bulletExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = bulletExplosion.sks; path = ../../../Desktop/bulletExplosion.sks; sourceTree = "<group>"; };
 		57CF12132176557D00C58ED6 /* laserFire.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = laserFire.mp3; sourceTree = "<group>"; };
 		57FFE254216451D400D28800 /* GalaxyInvaders.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GalaxyInvaders.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,9 +55,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5791111521AF575700BCBA8D /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				57FFE26F2164556A00D28800 /* bigBang.mp3 */,
+				57CF12132176557D00C58ED6 /* laserFire.mp3 */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		5791111621AF577400BCBA8D /* Emitters */ = {
+			isa = PBXGroup;
+			children = (
+				5791111821AF579C00BCBA8D /* bulletExplosion.sks */,
+				57FFE2732164558F00D28800 /* FirePartical.sks */,
+				57FFE277216456CB00D28800 /* GalaxyBackground.sks */,
+				5791111721AF577400BCBA8D /* bulletExplosion.sks */,
+			);
+			path = Emitters;
+			sourceTree = "<group>";
+		};
 		57FFE24B216451D400D28800 = {
 			isa = PBXGroup;
 			children = (
+				5791111921AF580000BCBA8D /* HomeScreen.sks */,
 				57FFE256216451D400D28800 /* GalaxyInvaders */,
 				57FFE255216451D400D28800 /* Products */,
 			);
@@ -78,11 +103,9 @@
 				57FFE266216451D600D28800 /* LaunchScreen.storyboard */,
 				57FFE264216451D600D28800 /* Assets.xcassets */,
 				57FFE25B216451D400D28800 /* Actions.sks */,
-				57FFE2732164558F00D28800 /* FirePartical.sks */,
-				57FFE277216456CB00D28800 /* GalaxyBackground.sks */,
+				5791111621AF577400BCBA8D /* Emitters */,
 				57CCCF5F219A35EA0068F30E /* bulletExplosion.sks */,
-				57FFE26F2164556A00D28800 /* bigBang.mp3 */,
-				57CF12132176557D00C58ED6 /* laserFire.mp3 */,
+				5791111521AF575700BCBA8D /* Sounds */,
 				57FFE269216451D600D28800 /* Info.plist */,
 			);
 			path = GalaxyInvaders;
@@ -155,6 +178,7 @@
 				57FFE278216456CB00D28800 /* GalaxyBackground.sks in Resources */,
 				57CCCF60219A35EA0068F30E /* bulletExplosion.sks in Resources */,
 				57FFE268216451D600D28800 /* LaunchScreen.storyboard in Resources */,
+				5791111A21AF580000BCBA8D /* HomeScreen.sks in Resources */,
 				57FFE25C216451D400D28800 /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

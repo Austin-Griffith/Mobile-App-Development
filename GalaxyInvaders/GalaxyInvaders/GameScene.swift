@@ -23,6 +23,12 @@ import CoreMotion
 //https://code.tutsplus.com/tutorials/create-space-invaders-with-swift-and-sprite-kit-introducing-sprite-kit--cms-23341
 
 
+//   UPDATES TO PROJECT   //
+// get enemies to spawn from the sides of the screen //
+// implement a home screen with button to start game //
+// rewrite methods to be more different than tutorial example //
+
+
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
@@ -32,26 +38,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var player:SKSpriteNode!
     
     var gameTimer:Timer!
+    var gameTimer1:Timer!
+    
     var possibleEnemies = ["ufo1", "ufo3"]
     
     //bit masks to calculate when an enemy is hit with a bullet from player
-    var alienCategory:UInt32 = 0x1 << 1
-    var playerBulletCategory:UInt32 = 0x1 << 0
+    var alienBitmask:UInt32 = 0x1 << 1
+    var playerBitmask:UInt32 = 0x1 << 0
     
     //SKLabelNodes used to display content to the game view
     var scoreBanner:SKLabelNode?
+    
+    //keeping track of score from count of bulletDidCollideWithAlien function
+    var score:Int = 0 {
+        didSet {
+            scoreBanner?.text = "Score: \(score)"
+        }
+    }
+    
+    
+    
     
 // initialize variable for CoreMotion Library for tilt control of player
 //    var motionManager = CMMotionManager()
 //    var xAcceleration:CGFloat = 0
     
     
-    //keeping track of score from count of bulletDidCollideWithAlien function
-    var score:Int = 0 {
-        didSet {
-            scoreBanner?.text = "Score: \(score)"
-            }
-    }
+
 
     
     override func didMove(to view: SKView)
@@ -73,7 +86,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player = SKSpriteNode(imageNamed: "spaceShipBlue")
         
         //setting the position of the score label to top left conner of game frame
-        player.position = CGPoint(x: self.frame.size.width / 9, y: player.size.height / 5 - 500 )
+        player.position = CGPoint(x: self.frame.size.width / 10, y: player.size.height / 5 - 500 )
+
+        
         self.addChild(player)
         
         //adding the gravity properties
@@ -87,11 +102,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreBanner?.fontName = "AmericanTypewriter-Bold"   //taken from apple UI fonts
         scoreBanner?.fontSize = 75
         scoreBanner?.fontColor = UIColor.red
-        score = 0
         
+        //initialize score to 0
+        score = 0
         self.addChild(scoreBanner!)
         
+        //calling addEnemy and AddSideEnemy within the gameTimer assignment values
         gameTimer = Timer.scheduledTimer(timeInterval: 0.75, target: self, selector: #selector(addEnemy), userInfo: nil, repeats: true)
+        gameTimer1 = Timer.scheduledTimer(timeInterval: 0.75, target: self, selector: #selector(addSideEnemy), userInfo: nil, repeats: true)
+        
+        
         
 //motionManger used with acceleration to control tilting of phone to controlm ovement of the player object
 //        motionManager.accelerometerUpdateInterval = 0.2
@@ -105,10 +125,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         } // end of didMove function
     
+    
+    
     @objc func addEnemy() {
+        
+        // using gameplay kit method arrayByShufflingObjects will randomly sort objects in the array when new one is added so random enemy is added
         possibleEnemies = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: possibleEnemies) as! [String]
-        //always will choose a random position in the array of possibleEnemies
+        
+        //choose first position in the array of possibleEnemies
         let alien = SKSpriteNode(imageNamed: possibleEnemies[0])
+        
         //distributes enemies between 0 and 414 coordinates
         let randomAlienPosition = GKRandomDistribution(lowestValue: 0, highestValue: 414)
         let position = CGFloat(randomAlienPosition.nextInt())
@@ -118,24 +144,57 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         alien.physicsBody = SKPhysicsBody(rectangleOf: alien.size)
         alien.physicsBody?.isDynamic = true
         
-        alien.physicsBody?.categoryBitMask = alienCategory
-        alien.physicsBody?.contactTestBitMask = playerBulletCategory
+        alien.physicsBody?.categoryBitMask = alienBitmask
+        alien.physicsBody?.contactTestBitMask = playerBitmask
         alien.physicsBody?.collisionBitMask = 0
         
         self.addChild(alien)
+        
         //initialize time for sponing enemies 
-        let animationDuration:TimeInterval = 3
+        let animationDuration:TimeInterval = 4
         var actionArray = [SKAction]()
         
-        actionArray.append(SKAction.move( to: CGPoint( x: position, y: -alien.size.height ), duration: animationDuration ) )
+        actionArray.append(SKAction.move( to: CGPoint( x: position, y: -alien.size.height - 800 ), duration: animationDuration ) )
         actionArray.append(SKAction.removeFromParent())
         alien.run(SKAction.sequence(actionArray))
         
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //calling the fire bullets function whent the user touches the screen
-        fireBullets()
+    
+    
+    @objc func addSideEnemy() {
+        
+        possibleEnemies = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: possibleEnemies) as! [String]
+        //always will choose a random position in the array of possibleEnemies
+        let alienSideSpawn = SKSpriteNode(imageNamed: possibleEnemies[0])
+        
+        //distributes enemies between 0 and 414 coordinates this is hard coded for 6plus and 7plus phone sizes
+        let randomAlienPosition = GKRandomDistribution(lowestValue: 0, highestValue: 414)
+        let position = CGFloat(randomAlienPosition.nextInt())
+        
+        //attaching values of position and physics body to alien object
+        alienSideSpawn.position = CGPoint(x: (self.frame.height) + (alienSideSpawn.size.height), y: position)
+        
+        //making a rectangle around the object as its physics bounding area
+        alienSideSpawn.physicsBody = SKPhysicsBody(rectangleOf: alienSideSpawn.size)
+        alienSideSpawn.physicsBody?.isDynamic = true
+        
+        //using bitmask opperation with Unsign Int for collisions
+        alienSideSpawn.physicsBody?.categoryBitMask = alienBitmask
+        alienSideSpawn.physicsBody?.contactTestBitMask = playerBitmask
+        alienSideSpawn.physicsBody?.collisionBitMask = 0
+        
+        //adding the enemy objects on each call to function
+        self.addChild(alienSideSpawn)
+        
+        //initialize time for sponing enemies
+        let animationDuration:TimeInterval = 5
+        var actionArray = [SKAction]()
+        
+        actionArray.append(SKAction.move( to: CGPoint( x: -alienSideSpawn.size.height - 500, y: position ), duration: animationDuration ) )
+        actionArray.append(SKAction.removeFromParent())
+        alienSideSpawn.run(SKAction.sequence(actionArray))
+        
     }
     
     
@@ -151,8 +210,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //add physicbody to bullet
         bulletNode.physicsBody = SKPhysicsBody(circleOfRadius: bulletNode.size.width / 2)
         bulletNode.physicsBody?.isDynamic = true
-        bulletNode.physicsBody?.categoryBitMask = playerBulletCategory
-        bulletNode.physicsBody?.contactTestBitMask = alienCategory
+        bulletNode.physicsBody?.categoryBitMask = playerBitmask
+        bulletNode.physicsBody?.contactTestBitMask = alienBitmask
         bulletNode.physicsBody?.collisionBitMask = 0
         bulletNode.physicsBody?.usesPreciseCollisionDetection = true
         
@@ -184,13 +243,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             movingSecondBody = contact.bodyA
         }
         
+        
         //bitwise & comparison to see which body is player and which body is the bullet
-        if (movingFirstBody.categoryBitMask & playerBulletCategory) != 0 && (movingSecondBody.categoryBitMask & alienCategory) != 0  {
+        if (movingFirstBody.categoryBitMask & playerBitmask) != 0 && (movingSecondBody.categoryBitMask & alienBitmask) != 0  {
             bulletDidCollideWithAlien(bullet: movingFirstBody.node as! SKSpriteNode, alien: movingSecondBody.node as! SKSpriteNode)
-            
         }
         
-    }
+        //checking contact between the player and enemy
+//        if (movingFirstBody.categoryBitMask & playerBitmask) != 1 && (movingSecondBody.categoryBitMask & alienBitmask) != 1 {
+//            alienDidCollideWithPlayer(player: movingFirstBody.node as! SKSpriteNode, alien: movingSecondBody.node as! SKSpriteNode)
+//        }
+        
+        
+        
+    }  // end of didBegin function
+    
     
 //    override func didSimulatePhysics() {
 //
@@ -206,6 +273,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //        }
 //    }
     
+    
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        //calling the fire bullets function when the user touches the screen
+        fireBullets()
+    }
+    
     // enables touch dragging of the player object
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch: AnyObject in touches {
@@ -216,6 +290,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    
+    
     func bulletDidCollideWithAlien(bullet: SKSpriteNode, alien: SKSpriteNode)  {
         //adding explosion feature when
         let explosion = SKEmitterNode(fileNamed: "bulletExplosion")!
@@ -225,11 +301,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
          //adding sound to explosion when colloision happens
         self.run(SKAction.playSoundFileNamed("bigBang.mp3", waitForCompletion: false))
         
+        
         bullet.removeFromParent()
         alien.removeFromParent()
         
         //calls the SKAction with sound for 2 seconds
         self.run( SKAction.wait(forDuration: 2) ) {
+            
+            //removing object from screen
             explosion.removeFromParent()
         }
         
@@ -237,6 +316,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         score += 1
         
     }
+    
+    
+    
+    func alienDidCollideWithPlayer(player: SKSpriteNode, alien: SKSpriteNode)  {
+        //adding explosion feature when
+        let explosion = SKEmitterNode(fileNamed: "bulletExplosion")!
+        explosion.position = alien.position
+        
+        self.addChild(explosion)
+        //adding sound to explosion when colloision happens
+        self.run(SKAction.playSoundFileNamed("bigBang.mp3", waitForCompletion: false))
+        
+        
+
+        alien.removeFromParent()
+        
+        //calls the SKAction with sound for 2 seconds
+        self.run( SKAction.wait(forDuration: 2) ) {
+            
+            //removing object from screen
+            explosion.removeFromParent()
+        }
+        
+        //decrease to score when alien hits the player
+        //score -= 5
+        
+    }
+    
+    
+    
+    
 
     
     override func update(_ currentTime: TimeInterval)
