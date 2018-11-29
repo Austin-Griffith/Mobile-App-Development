@@ -26,9 +26,29 @@ class HomeScreen: SKScene {
         //withName: ""  is reffering to the name given in HomeScreen.sks
         startGameButton = self.childNode(withName: "startGameButton") as! SKSpriteNode
         
+        startGameButton.texture = SKTexture(imageNamed: "startGameButton" )
         
+    }   //end of override didBegin function
+    
+    
+    // need to override the touchesBegin function to not have the game immeditatley start upon app launch
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-    }
+        let start = touches.first
+        if let position = start?.location(in: self) {
+            let gameArray = self.nodes(at: position)
+            
+            if gameArray.first?.name == "startGameButton" {
+                
+                let homeScreenTransition = SKTransition.flipHorizontal(withDuration: 0.5)
+                let gameStartScene = GameScene(size: self.size)
+                self.view?.presentScene(gameStartScene, transition: homeScreenTransition)
+                
+            }
+            
+        }
+        
+    }       // end of touchesBegan function
 
 
 }
