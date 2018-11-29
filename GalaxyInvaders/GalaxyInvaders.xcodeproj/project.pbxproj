@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5791111A21AF580000BCBA8D /* HomeScreen.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5791111921AF580000BCBA8D /* HomeScreen.sks */; };
+		5791111C21AF5AB500BCBA8D /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5791111B21AF5AB500BCBA8D /* HomeScreen.swift */; };
 		57CCCF60219A35EA0068F30E /* bulletExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 57CCCF5F219A35EA0068F30E /* bulletExplosion.sks */; };
 		57CF12142176557D00C58ED6 /* laserFire.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 57CF12132176557D00C58ED6 /* laserFire.mp3 */; };
 		57FFE258216451D400D28800 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FFE257216451D400D28800 /* AppDelegate.swift */; };
@@ -27,6 +28,7 @@
 		5791111721AF577400BCBA8D /* bulletExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = bulletExplosion.sks; sourceTree = "<group>"; };
 		5791111821AF579C00BCBA8D /* bulletExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = bulletExplosion.sks; path = ../../../../Desktop/bulletExplosion.sks; sourceTree = "<group>"; };
 		5791111921AF580000BCBA8D /* HomeScreen.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = HomeScreen.sks; sourceTree = "<group>"; };
+		5791111B21AF5AB500BCBA8D /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		57CCCF5F219A35EA0068F30E /* bulletExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = bulletExplosion.sks; path = ../../../Desktop/bulletExplosion.sks; sourceTree = "<group>"; };
 		57CF12132176557D00C58ED6 /* laserFire.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = laserFire.mp3; sourceTree = "<group>"; };
 		57FFE254216451D400D28800 /* GalaxyInvaders.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GalaxyInvaders.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				5791111921AF580000BCBA8D /* HomeScreen.sks */,
+				5791111B21AF5AB500BCBA8D /* HomeScreen.swift */,
 				57FFE256216451D400D28800 /* GalaxyInvaders */,
 				57FFE255216451D400D28800 /* Products */,
 			);
@@ -190,6 +193,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5791111C21AF5AB500BCBA8D /* HomeScreen.swift in Sources */,
 				57FFE25E216451D400D28800 /* GameScene.swift in Sources */,
 				57FFE260216451D400D28800 /* GameViewController.swift in Sources */,
 				57FFE258216451D400D28800 /* AppDelegate.swift in Sources */,
