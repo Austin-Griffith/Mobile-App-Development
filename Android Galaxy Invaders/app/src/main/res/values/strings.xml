@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Galaxy Invaders Android</string>
+    <string name="title_activity_game">GameActivity</string>
+</resources>
