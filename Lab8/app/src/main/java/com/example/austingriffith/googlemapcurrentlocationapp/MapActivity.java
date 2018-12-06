@@ -28,8 +28,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        Toast.makeText(this, "Map is Ready", Toast.LENGTH_SHORT).show();
-        Log.d(TAG, "onMapReady: map is ready");
+        Toast.makeText(this, "Map is Ready", Toast.LENGTH_LONG).show();
+        Log.d(TAG, "onMapReady: Map has been loaded");
         mMap = googleMap;
 
         getDeviceLocation();
@@ -73,7 +73,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     private void getDeviceLocation(){
         Log.d(TAG, "getDeviceLocation: getting the devices current location");
-
+        Log.d(TAG, "getDeviceLocation: REACHED INSIDE getDeviceLocation METHOD");
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         try{
@@ -83,18 +83,19 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 location.addOnCompleteListener(new OnCompleteListener() {
                     @Override
                     public void onComplete(@NonNull Task task) {
+
                         if(task.isSuccessful()){
+
                             Log.d(TAG, "onComplete: found location!");
                             Location currentLocation = (Location) task.getResult();
                             Log.d(TAG, "getDeviceLocation: WE ARE INSIDE METHOD");
-
-                            moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
-                                    DEFAULT_ZOOM);
+                            moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), DEFAULT_ZOOM);
                             Log.d(TAG, "onComplete: WE ARE INSIDE METHOD --> MOVE CAMERA JUST EXECUTED!");
 
-                        }else{
-                            Log.d(TAG, "onComplete: current location is null");
-                            Toast.makeText(MapActivity.this, "unable to get current location", Toast.LENGTH_SHORT).show();
+                        }
+                            else {
+                                Log.d(TAG, "onComplete: current location is null");
+                                Toast.makeText(MapActivity.this, "unable to get current location", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -124,13 +125,15 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         String [] permissions = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION } ;
 
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+        {
 
             if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
                     COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 mLocationPermissionGranted = true ;
                 initMap();
-            } else {
+            }
+            else {
                 ActivityCompat.requestPermissions(this, permissions, LOCATION_PERMISSION_REQUEST_CODE);
             }
         } else {
@@ -155,11 +158,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                             mLocationPermissionGranted = false ;
                             Log.d(TAG, "onRequestPermissionsResult: permissions not granted ") ;
+                            //break out here if permissions were not granted
                             return ;
                         }
                     }
                     Log.d(TAG, "onRequestPermissionsResult: permissions granted ") ;
                     mLocationPermissionGranted = true ;
+
                     //permission are granted so now can initialize map
                     initMap();
                 }
