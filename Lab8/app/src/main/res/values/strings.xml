@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Google Map Current Location App</string>
+
+    <string name="google_map_api_key">AIzaSyBp9homKu9h2xCTs9cmM3iUaupnV5xjhxA</string>
+</resources>
