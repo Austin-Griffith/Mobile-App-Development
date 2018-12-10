@@ -57,6 +57,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		570298FD21BF1B4600A9AC35 /* Game Files */ = {
+			isa = PBXGroup;
+			children = (
+				57FFE259216451D400D28800 /* GameScene.sks */,
+				57FFE25D216451D400D28800 /* GameScene.swift */,
+			);
+			path = "Game Files";
+			sourceTree = "<group>";
+		};
 		5791111521AF575700BCBA8D /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -99,15 +108,14 @@
 			isa = PBXGroup;
 			children = (
 				57FFE257216451D400D28800 /* AppDelegate.swift */,
-				57FFE259216451D400D28800 /* GameScene.sks */,
-				57FFE25D216451D400D28800 /* GameScene.swift */,
 				57FFE25F216451D400D28800 /* GameViewController.swift */,
+				570298FD21BF1B4600A9AC35 /* Game Files */,
 				57FFE261216451D400D28800 /* Main.storyboard */,
 				57FFE266216451D600D28800 /* LaunchScreen.storyboard */,
 				57FFE264216451D600D28800 /* Assets.xcassets */,
 				57FFE25B216451D400D28800 /* Actions.sks */,
-				5791111621AF577400BCBA8D /* Emitters */,
 				57CCCF5F219A35EA0068F30E /* bulletExplosion.sks */,
+				5791111621AF577400BCBA8D /* Emitters */,
 				5791111521AF575700BCBA8D /* Sounds */,
 				57FFE269216451D600D28800 /* Info.plist */,
 			);

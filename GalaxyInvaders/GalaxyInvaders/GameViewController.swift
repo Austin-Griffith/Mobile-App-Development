@@ -18,15 +18,23 @@ class GameViewController: UIViewController {
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             //initilizing the game scene to the app view 
-            if let scene = SKScene(fileNamed: "GameScene") {
+//            if let scene = SKScene(fileNamed: "GameScene") {
+//                // Set the scale mode to scale to fit the window
+////                scene.scaleMode = .aspectFill
+//                scene.scaleMode = .aspectFit
+//
+//                // Present the scene
+//                view.presentScene(scene)
+//            }
+            
+            //IMPLEMENTING THE HOMESCREEN as the starting scene for this application 
+            if let scene = SKScene(fileNamed: "HomeScreen") {
                 // Set the scale mode to scale to fit the window
-//                scene.scaleMode = .aspectFill
                 scene.scaleMode = .aspectFit
                 
                 // Present the scene
                 view.presentScene(scene)
             }
-            
             view.ignoresSiblingOrder = true
             view.showsFPS = true
             view.showsNodeCount = true

@@ -26,6 +26,9 @@ import CoreMotion
 //   UPDATES TO PROJECT   //
 // get enemies to spawn from the sides of the screen //
 // implement a home screen with button to start game //
+// adding additional game timer for side enemy spawning //
+// finish implementing the CoreMotion features --> controlling player object with phone tile //
+
 // rewrite methods to be more different than tutorial example //
 
 
@@ -41,6 +44,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameTimer1:Timer!
     
     var possibleEnemies = ["ufo1", "ufo3"]
+    var possibleSideEnemies = ["ufo2", "ufo4"]
     
     //bit masks to calculate when an enemy is hit with a bullet from player
     var alienBitmask:UInt32 = 0x1 << 1
@@ -60,11 +64,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
 // initialize variable for CoreMotion Library for tilt control of player
-//    var motionManager = CMMotionManager()
-//    var xAcceleration:CGFloat = 0
+    var motionManager = CMMotionManager()
+    var xMovement:CGFloat = 0
     
-    
-
 
     
     override func didMove(to view: SKView)
@@ -114,16 +116,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
 //motionManger used with acceleration to control tilting of phone to controlm ovement of the player object
-//        motionManager.accelerometerUpdateInterval = 0.2
-//        motionManager.startAccelerometerUpdates(to: OperationQueue.current!) { (data:CMAccelerometerData?, error:Error?) in
-//
-//            if let accelerometerData = data {
-//                let acceleration = accelerometerData.acceleration
-//                self.xAcceleration = CGFloat(acceleration.x) * 0.75 + self.xAcceleration * 0.25
-//            }
-//        }
+        motionManager.accelerometerUpdateInterval = 0.2
+        motionManager.startAccelerometerUpdates(to: OperationQueue.current!) { (data:CMAccelerometerData?, error:Error?) in
+
+            if let accelerometerData = data {
+                let acceleration = accelerometerData.acceleration
+                self.xMovement = CGFloat(acceleration.x) * 0.75 + self.xMovement * 0.25
+            }
+        }
         
         } // end of didMove function
+    
+    
+    override func didSimulatePhysics() {
+        
+        player.position.x += xMovement * 50
+        if (player.position.x < -400)
+        {
+            player.position = CGPoint(x: self.size.width + 25, y: player.position.y )
+        }
+        else if (player.position.x > self.size.width + 25 )
+        {
+            player.position = CGPoint(x: -300, y: player.position.y )
+            
+        }
+        
+    }   //end of didSimulatePhysics
+    
     
     
     
@@ -141,6 +160,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //attaching values of position and physics body to alien object 
         alien.position = CGPoint(x: position, y: self.frame.height + alien.size.height)
+        
+        //attaching values of position and physics body to alien object
         alien.physicsBody = SKPhysicsBody(rectangleOf: alien.size)
         alien.physicsBody?.isDynamic = true
         
@@ -161,7 +182,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     
-    
+    // method to spawn new enemies from the sides of the screen in game
     @objc func addSideEnemy() {
         
         possibleEnemies = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: possibleEnemies) as! [String]
@@ -257,21 +278,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
     }  // end of didBegin function
-    
-    
-//    override func didSimulatePhysics() {
-//
-//        player.position.x += xAcceleration * 50
-//        if (player.position.x < -30)
-//        {
-//            player.position = CGPoint(x: self.size.width + 25, y: player.position.y )
-//        }
-//        else if (player.position.x > self.size.width + 25 )
-//        {
-//            player.position = CGPoint(x: -25, y: player.position.y )
-//
-//        }
-//    }
     
     
     
