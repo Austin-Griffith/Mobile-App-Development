@@ -33,7 +33,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonExit = (ImageButton) findViewById(R.id.buttonExit) ;
 
         //adding a listener for user input
-//        buttonExit.setOnClickListener(this);
+        //using override to call finish() method to quit app
+        buttonExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                System.exit(0);
+            }
+        });
 
 
     }
