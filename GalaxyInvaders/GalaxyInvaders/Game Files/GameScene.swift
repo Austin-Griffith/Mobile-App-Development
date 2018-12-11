@@ -31,8 +31,6 @@ import CoreMotion
 // find collosions between player object and enemy objects
 
 
-
-
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
@@ -298,27 +296,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //        playerNode.physicsBody?.usesPreciseCollisionDetection = true
 //
   
-        //physics bodies for player and enemy
-        var movingBody1:SKPhysicsBody
-        var movingBody2:SKPhysicsBody
-        
-        //checking contact between bullet and enemy
-        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask
-        {
-            movingBody1 = contact.bodyA
-            movingBody2 = contact.bodyB
-        } else
-        {
-            movingBody1 = contact.bodyB
-            movingBody2 = contact.bodyA
-        }
-        
+//        //physics bodies for player and enemy
+//        var movingBody1:SKPhysicsBody
+//        var movingBody2:SKPhysicsBody
+//
+//        //checking contact between bullet and enemy
+//        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask
+//        {
+//            movingBody1 = contact.bodyA
+//            movingBody2 = contact.bodyB
+//        } else
+//        {
+//            movingBody1 = contact.bodyB
+//            movingBody2 = contact.bodyA
+//        }
+//
         
         //bitwise & comparison to see which body is player and which body is the enemy
         //checking contact between the player and enemy
-                if (movingBody1.categoryBitMask & playerBitmask) != 0 && (movingBody2.categoryBitMask & alienBitmask) != 0 {
-                    alienDidCollideWithPlayer(player: movingBody1.node as! SKSpriteNode, alien: movingBody2.node as! SKSpriteNode)
-                }
+//                if (movingBody1.categoryBitMask & playerBitmask) != 0 && (movingBody2.categoryBitMask & alienBitmask) != 0 {
+//                    alienDidCollideWithPlayer(player: movingBody1.node as! SKSpriteNode, alien: movingBody2.node as! SKSpriteNode)
+//                }
         
     }  // end of didCollide function
     
