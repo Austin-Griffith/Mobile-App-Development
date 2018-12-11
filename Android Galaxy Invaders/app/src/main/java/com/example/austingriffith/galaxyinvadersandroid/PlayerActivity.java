@@ -54,6 +54,8 @@ public class PlayerActivity {
         boosting = false;
     }
 
+
+
     //Method to update coordinate of character
 //    public void update(){
 //        //updating x coordinate

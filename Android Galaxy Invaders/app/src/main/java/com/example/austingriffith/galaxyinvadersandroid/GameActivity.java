@@ -1,6 +1,11 @@
 package com.example.austingriffith.galaxyinvadersandroid;
 
+import android.content.Context;
 import android.graphics.Point;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Display;
@@ -13,12 +18,6 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //Initializing game view object
-        //spaceGame = new GameView(this);
-
-        //adding it to content view
-        //setContentView(spaceGame);
 
         //Getting display object
         Display display = getWindowManager().getDefaultDisplay();
@@ -33,7 +32,9 @@ public class GameActivity extends AppCompatActivity {
 
         //adding it to contentview
         setContentView(spaceGame);
+
     }
+
 
     //pausing the game when activity is in paused state
     //activity is no longer in foreground
