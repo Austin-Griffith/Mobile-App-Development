@@ -28,8 +28,8 @@ import CoreMotion
 // implement a home screen with button to start game //
 // adding additional game timer for side enemy spawning //
 // finish implementing the CoreMotion features --> controlling player object with phone tile //
+// find collosions between player object and enemy objects
 
-// rewrite methods to be more different than tutorial example //
 
 
 
@@ -61,9 +61,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     
-    
-    
-// initialize variable for CoreMotion Library for tilt control of player
+    // initialize variable for CoreMotion Library for tilt control of player
     var motionManager = CMMotionManager()
     var xMovement:CGFloat = 0
     
@@ -103,7 +101,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreBanner?.position = CGPoint(x: self.frame.size.width / 15 - 250, y: self.size.height / 5 + 315 )
         scoreBanner?.fontName = "AmericanTypewriter-Bold"   //taken from apple UI fonts
         scoreBanner?.fontSize = 75
-        scoreBanner?.fontColor = UIColor.red
+        scoreBanner?.fontColor = UIColor.green
         
         //initialize score to 0
         score = 0
@@ -115,7 +113,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         
-//motionManger used with acceleration to control tilting of phone to controlm ovement of the player object
+        //motionManger used with acceleration to control tilting of phone to controlm ovement of the player object
         motionManager.accelerometerUpdateInterval = 0.2
         motionManager.startAccelerometerUpdates(to: OperationQueue.current!) { (data:CMAccelerometerData?, error:Error?) in
 
@@ -125,9 +123,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         
-        } // end of didMove function
+    } // end of didMove function
     
     
+    //Performs any scene-specific updates that need to occur after physics simulations are performed
     override func didSimulatePhysics() {
         
         player.position.x += xMovement * 50
@@ -158,7 +157,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let randomAlienPosition = GKRandomDistribution(lowestValue: 0, highestValue: 414)
         let position = CGFloat(randomAlienPosition.nextInt())
         
-        //attaching values of position and physics body to alien object 
+        //attaching values of position and physics body to alien object
         alien.position = CGPoint(x: position, y: self.frame.height + alien.size.height)
         
         //attaching values of position and physics body to alien object
@@ -171,7 +170,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.addChild(alien)
         
-        //initialize time for sponing enemies 
+        //initialize time for sponing enemies
         let animationDuration:TimeInterval = 4
         var actionArray = [SKAction]()
         
@@ -179,15 +178,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         actionArray.append(SKAction.removeFromParent())
         alien.run(SKAction.sequence(actionArray))
         
-    }
+    }   //end of addEnemy function
     
     
     // method to spawn new enemies from the sides of the screen in game
     @objc func addSideEnemy() {
         
-        possibleEnemies = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: possibleEnemies) as! [String]
+        possibleSideEnemies = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: possibleSideEnemies) as! [String]
         //always will choose a random position in the array of possibleEnemies
-        let alienSideSpawn = SKSpriteNode(imageNamed: possibleEnemies[0])
+        let alienSideSpawn = SKSpriteNode(imageNamed: possibleSideEnemies[0])
         
         //distributes enemies between 0 and 414 coordinates this is hard coded for 6plus and 7plus phone sizes
         let randomAlienPosition = GKRandomDistribution(lowestValue: 0, highestValue: 414)
@@ -245,7 +244,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         actionArray.append(SKAction.removeFromParent())
         bulletNode.run(SKAction.sequence(actionArray))
         
-    }
+    }   //END OF FIREBULLETS METHOD
+    
+    
     
     func didBegin(_ contact: SKPhysicsContact) {
         
@@ -271,16 +272,60 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         //checking contact between the player and enemy
-//        if (movingFirstBody.categoryBitMask & playerBitmask) != 1 && (movingSecondBody.categoryBitMask & alienBitmask) != 1 {
+//        if (movingFirstBody.categoryBitMask & playerBitmask) != 0 && (movingSecondBody.categoryBitMask & alienBitmask) != 0 {
 //            alienDidCollideWithPlayer(player: movingFirstBody.node as! SKSpriteNode, alien: movingSecondBody.node as! SKSpriteNode)
 //        }
-        
-        
         
     }  // end of didBegin function
     
     
     
+    
+    
+    func didCollide(_ contact: SKPhysicsContact) {
+        
+        print("INSIDE didCollide METHOD")
+        
+//        let playerNode = SKSpriteNode(imageNamed: "spaceShipBLue")
+//        playerNode.position = player.position
+//
+//        //add physicbody to playerNode
+//        playerNode.physicsBody = SKPhysicsBody(circleOfRadius: playerNode.size.width)
+//        playerNode.physicsBody?.isDynamic = true
+//        playerNode.physicsBody?.categoryBitMask = playerBitmask
+//        playerNode.physicsBody?.contactTestBitMask = alienBitmask
+//        playerNode.physicsBody?.collisionBitMask = 0
+//        playerNode.physicsBody?.usesPreciseCollisionDetection = true
+//
+  
+        //physics bodies for player and enemy
+        var movingBody1:SKPhysicsBody
+        var movingBody2:SKPhysicsBody
+        
+        //checking contact between bullet and enemy
+        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask
+        {
+            movingBody1 = contact.bodyA
+            movingBody2 = contact.bodyB
+        } else
+        {
+            movingBody1 = contact.bodyB
+            movingBody2 = contact.bodyA
+        }
+        
+        
+        //bitwise & comparison to see which body is player and which body is the enemy
+        //checking contact between the player and enemy
+                if (movingBody1.categoryBitMask & playerBitmask) != 0 && (movingBody2.categoryBitMask & alienBitmask) != 0 {
+                    alienDidCollideWithPlayer(player: movingBody1.node as! SKSpriteNode, alien: movingBody2.node as! SKSpriteNode)
+                }
+        
+    }  // end of didCollide function
+    
+    
+    
+    
+ 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         //calling the fire bullets function when the user touches the screen
         fireBullets()
@@ -297,8 +342,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     
-    
     func bulletDidCollideWithAlien(bullet: SKSpriteNode, alien: SKSpriteNode)  {
+        
+        print("INSIDE bulletDidCollideWithPlayer METHOD")
+        
+        
         //adding explosion feature when
         let explosion = SKEmitterNode(fileNamed: "bulletExplosion")!
         explosion.position = alien.position
@@ -326,6 +374,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     func alienDidCollideWithPlayer(player: SKSpriteNode, alien: SKSpriteNode)  {
+        
+        //debug tests for method
+        print("INSIDE alienDidCollideWithPlayer METHOD")
+        
+        
         //adding explosion feature when
         let explosion = SKEmitterNode(fileNamed: "bulletExplosion")!
         explosion.position = alien.position
@@ -334,8 +387,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //adding sound to explosion when colloision happens
         self.run(SKAction.playSoundFileNamed("bigBang.mp3", waitForCompletion: false))
         
-        
-
         alien.removeFromParent()
         
         //calls the SKAction with sound for 2 seconds
@@ -349,9 +400,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //score -= 5
         
     }
-    
-    
-    
     
 
     
