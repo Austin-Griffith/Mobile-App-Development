@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -41,11 +42,25 @@ public class GameView extends SurfaceView implements Runnable {
     private EnemyActivity[] enemies;
     private EnemyActivity[] aliens ;
 
-    private int enemyCount = 1;
-
+    //spawning 2 aliens per update call
+    private int enemyCount = 2;
 
     //Adding an stars list
     private ArrayList<GalaxyBackground> galaxy = new ArrayList<GalaxyBackground>();
+
+    //defining a boom object to display blast
+    private Explosion explosion;
+
+
+
+    private ArrayList<Bullet> mLasers;
+    private ArrayList<EnemyActivity> mEnemies;
+
+    private int mScreenSizeX, mScreenSizeY;
+    private int mCounter = 0;
+
+
+
 
     public GameView(Context context, int screenX, int screenY)
     {
@@ -60,14 +75,20 @@ public class GameView extends SurfaceView implements Runnable {
         paint = new Paint();
 
 
-        //adding 100 stars you may increase the number
+
+        mScreenSizeX = screenX;
+        mScreenSizeY = screenY;
+
+
+
+        //adding 400 stars for enhanced background effect
         int starsInGalaxy = 400;
         for (int i = 0; i < starsInGalaxy; i++) {
             GalaxyBackground s  = new GalaxyBackground(screenX, screenY);
             galaxy.add(s);
         }
 
-        //initializing enemy object array with objects
+        //initializing object array with objects
         enemies = new EnemyActivity[enemyCount];
         for(int i=0; i<enemyCount; i++){
             enemies[i] = new EnemyActivity(context, screenX, screenY);
@@ -79,11 +100,32 @@ public class GameView extends SurfaceView implements Runnable {
             aliens[i] = new EnemyActivity(context, screenX, screenY) ;
         }
 
+        //initializing explosion object
+        explosion = new Explosion(context);
+
     }
 
     private void update() {
         //updating playerObject position within while game loop
         playerObject.update();
+//
+//        if (mCounter % 200 == 0) {
+//            playerObject.fire();
+//        }
+
+        //setting explosion outside the user screen
+        explosion.setX(-250);
+        explosion.setY(-250);
+
+
+//        for (Bullet l : playerObject.getLasers()) {
+//            if (Rect.intersects(e.getCollision(), l.getCollision())) {
+//                e.hit();
+//                l.destroy();
+//            }
+//        }
+
+
 
         //Updating the stars with playerObject speed
         for (GalaxyBackground s : galaxy) {
@@ -94,18 +136,56 @@ public class GameView extends SurfaceView implements Runnable {
         //updating the enemy coordinate with respect to player speed
         for(int i=0; i < enemyCount; i++){
             enemies[i].update(playerObject.getSpeed());
+
+            //if collision occurs with player
+            if (Rect.intersects(playerObject.getDetectCollision(), enemies[i].getDetectCollision()))
+            {
+                //displaying boom at that location
+                explosion.setX(enemies[i].getX());
+                explosion.setY(enemies[i].getY());
+
+                //moving enemy outside the left edge
+                enemies[i].setX(-200);
+            }
         }
 
         for (int i=0 ; i < enemyCount; i++) {
             aliens[i].update(playerObject.getSpeed());
+            //if collision occurs with player
+
+            if (Rect.intersects(playerObject.getDetectCollision(), aliens[i].getDetectCollision())) {
+
+                //displaying boom at that location
+                explosion.setX(aliens[i].getX());
+                explosion.setY(aliens[i].getY());
+
+                //moving enemy outside the left edge
+                aliens[i].setX(-200);
+            }
         }
 
 
-    }
+//        for (EnemyActivity e : mEnemies) {
+//            e.update();
+//            if (Rect.intersects(e.getCollision(), playerObject.getCollision())) {
+//                //e.destroy();
+//            }
+//
+//            for (Bullet l : playerObject.getLasers()) {
+//                if (Rect.intersects(e.getCollision(), l.getCollision())) {
+//                    e.hit();
+//                    l.destroy();
+//                }
+//            }
+//        }
+
+
+    }   //END OF UPDATE METHOD
 
     private void draw() {
         //checking if surface is valid
         if (surfaceHolder.getSurface().isValid()) {
+
             //locking the canvas
             canvas = surfaceHolder.lockCanvas();
 
@@ -121,26 +201,58 @@ public class GameView extends SurfaceView implements Runnable {
                 canvas.drawPoint(s.getX(), s.getY(), paint);
             }
 
-
-
             //Drawing the playerObject
             canvas.drawBitmap(playerObject.getBitmap(), playerObject.getX(), playerObject.getY(), paint);
 
             //drawing the enemies
-            for (int i = 0; i < enemyCount; i++) {
-                canvas.drawBitmap(enemies[i].getBitmap(), enemies[i].getX(), enemies[i].getY(), paint);
-            }
-
             for (int i=0; i < enemyCount; i++) {
                 Log.d("Debugging", "INSIDE DRAW FOR LOOP") ;
                 canvas.drawBitmap(aliens[i].getAlien1(), aliens[i].getX(), aliens[i].getY(), paint);
             }
-            Log.d("Debugging", "OUTSIDE DRAW FOR LOOP") ;
+
+            for (int i=0; i < enemyCount; i++) {
+                canvas.drawBitmap(aliens[i].getAlien2(), aliens[i].getX(), aliens[i].getY(), paint);
+            }
+
+            for (int i=0; i < enemyCount; i++) {
+                canvas.drawBitmap(aliens[i].getAlien3(), aliens[i].getX(), aliens[i].getY(), paint);
+            }
+
+            for (int i = 0; i < enemyCount; i++) {
+                canvas.drawBitmap(enemies[i].getAlien4(), enemies[i].getX(), enemies[i].getY(), paint);
+            }
+
+            //drawing boom image
+            canvas.drawBitmap(explosion.getBitmap(), explosion.getX(), explosion.getY(), paint);
+
+
+//            for (Bullet l : playerObject.getLasers()) {
+//                canvas.drawBitmap(l.getBitmap(), l.getX(), l.getY(), paint);
+//            }
+
 
             //Unlocking the canvas
             surfaceHolder.unlockCanvasAndPost(canvas);
         }
-    }
+
+    }   //END OF DRAW METHOD
+
+
+//    public void steerLeft(float speed) {
+//        mPlayer.steerLeft(speed);
+//    }
+//
+//    public void steerRight(float speed) {
+//        mPlayer.steerRight(speed);
+//    }
+//
+//    public void stay() {
+//        mPlayer.stay();
+//    }
+
+
+
+
 
     private void control() {
         try {
