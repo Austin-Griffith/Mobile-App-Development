@@ -29,30 +29,20 @@ public class PlayerActivity {
     //Gravity Value to add gravity effect on the ship
     private final int GRAVITY = -10;
 
-    //Controlling Y coordinate so that ship won't go outside the screen
-    private int maxY;
-    private int minY;
+    //Controlling X & Y coordinate so that ship won't go outside the screen
+    private int maxY; private int minY;
+    private int minX ; private int maxX ;
 
     //Limit the bounds of the ship's speed
     private final int MIN_SPEED = 1;
     private final int MAX_SPEED = 20;
 
-//
-//    private Bitmap mBitmap;
-//    private int mX;
-//    private int mY;
-//    private int mSpeed;
-//    private int mMaxX;
-//    private int mMinX;
-//    private int mMaxY;
-//    private int mMinY;
-//    private int mMargin = 16;
-//    private boolean mIsSteerLeft, mIsSteerRight;
-//    private float mSteerSpeed;
-//    private Rect mCollision;
-//    private ArrayList<Bullet> mBullets;
-//    private Context mContext;
-//    private int mScreenSizeX, mScreenSizeY;
+
+    private boolean mIsSteerLeft, mIsSteerRight;
+    private float mSteerSpeed;
+    private ArrayList<Bullet> mBullets;
+    private Context mContext;
+    private int mScreenSizeX, mScreenSizeY;
 
 
 
@@ -68,9 +58,11 @@ public class PlayerActivity {
 
         //calculating maxY
         maxY = screenY - player.getHeight();
+        maxX = screenX - player.getWidth() ;
 
         //top edge's y point is 0 so min y will always be zero
         minY = 0;
+        minX = 0;
 
         //setting the boosting value to false initially
         boosting = false;
@@ -80,21 +72,12 @@ public class PlayerActivity {
 
 
 
-//        mScreenSizeX = screenX;
-//        mScreenSizeY = screenY;
-//        mContext = context;
-//        mSpeed = 1;
-//
-//        mMaxX = screenX - mBitmap.getWidth();
-//        mMaxY = screenY - mBitmap.getHeight();
-//        mMinX = 0;
-//        mMinY = 0;
-//
-//        mX = screenX/2 - mBitmap.getWidth()/2;
-//        mY = screenY - mBitmap.getHeight() - mMargin;
-//
-//        mBullets = new ArrayList<>();
-//        mCollision = new Rect(mX, mY, mX + mBitmap.getWidth(), mY + mBitmap.getHeight());
+        mScreenSizeX = screenX;
+        mScreenSizeY = screenY;
+        mContext = context;
+
+        mBullets = new ArrayList<>();
+
 
 
     }   //END OF PLAYERACTIVITY
@@ -148,23 +131,26 @@ public class PlayerActivity {
         detectCollision.bottom = y + player.getHeight();
 
 
+        if (mIsSteerLeft){
+            x -= 10 * mSteerSpeed;
+            if (x<minX){
+                x = minX;
+            }
+        }else if (mIsSteerRight){
+            x += 10 * mSteerSpeed;
+            if (x>maxX){
+                x = maxX;
+            }
+        }
 
-//        if (mIsSteerLeft){
-//            mX -= 10 * mSteerSpeed;
-//            if (mX<mMinX){
-//                mX = mMinX;
-//            }
-//        }else if (mIsSteerRight){
-//            mX += 10 * mSteerSpeed;
-//            if (mX>mMaxX){
-//                mX = mMaxX;
-//            }
-//        }
+        detectCollision.left = x;
+        detectCollision.top = y;
+        detectCollision.right = x + player.getWidth();
+        detectCollision.bottom = y + player.getHeight();
 
-//        mCollision.left = mX;
-//        mCollision.top = mY;
-//        mCollision.right = mX + mBitmap.getWidth();
-//        mCollision.bottom = mY + mBitmap.getHeight();
+
+
+
 
 //        for (Bullet l : mBullets) {
 //            l.update();
@@ -183,12 +169,14 @@ public class PlayerActivity {
 //            }
 //        }
 
+
     }   //END OF UPDATE METHOD
 
 
-   // public ArrayList<Bullet> getLasers() { return mBullets; }
 
-   // public void fire(){ mBullets.add(new Bullet(mContext, mScreenSizeX, mScreenSizeY, mX, mY, mBitmap, false)); }
+    public ArrayList<Bullet> getBullets() { return mBullets; }
+
+    public void fire(){ mBullets.add(new Bullet(mContext, mScreenSizeX, mScreenSizeY, x, y, player, false)); }
 
 
     public Rect getDetectCollision() { return detectCollision; }
@@ -210,24 +198,27 @@ public class PlayerActivity {
     }
 
 
-    //public Bitmap getBitmap() { return mBitmap; }
-//    public void steerRight(float speed){
-//        mIsSteerLeft = false;
-//        mIsSteerRight = true;
-//        mSteerSpeed = Math.abs(speed);
-//    }
-//
-//    public void steerLeft(float speed){
-//        mIsSteerRight = false;
-//        mIsSteerLeft = true;
-//        mSteerSpeed = Math.abs(speed);
-//    }
-//
-//    public void stay(){
-//        mIsSteerLeft = false;
-//        mIsSteerRight = false;
-//        mSteerSpeed = 0;
-//    }
+
+    public void steerRight(float speed)
+    {
+        mIsSteerLeft = false;
+        mIsSteerRight = true;
+        mSteerSpeed = Math.abs(speed);
+    }
+
+    public void steerLeft(float speed)
+    {
+        mIsSteerRight = false;
+        mIsSteerLeft = true;
+        mSteerSpeed = Math.abs(speed);
+    }
+
+    public void stay()
+    {
+        mIsSteerLeft = false;
+        mIsSteerRight = false;
+        mSteerSpeed = 0;
+    }
 
 
 }

@@ -51,15 +51,9 @@ public class GameView extends SurfaceView implements Runnable {
     //defining a boom object to display blast
     private Explosion explosion;
 
-
-
-    private ArrayList<Bullet> mLasers;
+    private ArrayList<Bullet> mBullets;
     private ArrayList<EnemyActivity> mEnemies;
-
     private int mScreenSizeX, mScreenSizeY;
-    private int mCounter = 0;
-
-
 
 
     public GameView(Context context, int screenX, int screenY)
@@ -74,12 +68,8 @@ public class GameView extends SurfaceView implements Runnable {
         surfaceHolder = getHolder();
         paint = new Paint();
 
-
-
         mScreenSizeX = screenX;
         mScreenSizeY = screenY;
-
-
 
         //adding 400 stars for enhanced background effect
         int starsInGalaxy = 400;
@@ -108,24 +98,12 @@ public class GameView extends SurfaceView implements Runnable {
     private void update() {
         //updating playerObject position within while game loop
         playerObject.update();
-//
-//        if (mCounter % 200 == 0) {
-//            playerObject.fire();
-//        }
 
         //setting explosion outside the user screen
         explosion.setX(-250);
         explosion.setY(-250);
 
-
-//        for (Bullet l : playerObject.getLasers()) {
-//            if (Rect.intersects(e.getCollision(), l.getCollision())) {
-//                e.hit();
-//                l.destroy();
-//            }
-//        }
-
-
+        boolean deleting = true;
 
         //Updating the stars with playerObject speed
         for (GalaxyBackground s : galaxy) {
@@ -165,19 +143,22 @@ public class GameView extends SurfaceView implements Runnable {
         }
 
 
+
+
+
 //        for (EnemyActivity e : mEnemies) {
-//            e.update();
-//            if (Rect.intersects(e.getCollision(), playerObject.getCollision())) {
-//                //e.destroy();
+//            //e.update();
+//            if (Rect.intersects(e.getDetectCollision(), playerObject.getDetectCollision())) {
+//                e.destroy();
 //            }
-//
-//            for (Bullet l : playerObject.getLasers()) {
-//                if (Rect.intersects(e.getCollision(), l.getCollision())) {
-//                    e.hit();
-//                    l.destroy();
-//                }
-//            }
-//        }
+
+            for (Bullet b : playerObject.getBullets()) {
+                if (Rect.intersects(b.getCollision(), b.getCollision())) {
+                    //e.hit();
+                    //b.destroy();
+                }
+            }
+        //}
 
 
     }   //END OF UPDATE METHOD
@@ -226,10 +207,12 @@ public class GameView extends SurfaceView implements Runnable {
             canvas.drawBitmap(explosion.getBitmap(), explosion.getX(), explosion.getY(), paint);
 
 
-//            for (Bullet l : playerObject.getLasers()) {
-//                canvas.drawBitmap(l.getBitmap(), l.getX(), l.getY(), paint);
-//            }
+            //THERE IS A BUG IN THE DRAWING OR UPDATE METHOD BECAUSE BULLETS ARE BEING DRAWN TO SCREEN BUT NOT
+            //BEING CLEARED UPON ACTION_UP AND ACTION_DOWN CALLS TO onCreate() OVERRIDE METHOD
+            for (Bullet b : playerObject.getBullets()) {
+                canvas.drawBitmap(b.getBitmap(), b.getX(), b.getY() + 100 , paint);
 
+            }
 
             //Unlocking the canvas
             surfaceHolder.unlockCanvasAndPost(canvas);
@@ -238,20 +221,19 @@ public class GameView extends SurfaceView implements Runnable {
     }   //END OF DRAW METHOD
 
 
-//    public void steerLeft(float speed) {
-//        mPlayer.steerLeft(speed);
-//    }
-//
-//    public void steerRight(float speed) {
-//        mPlayer.steerRight(speed);
-//    }
-//
-//    public void stay() {
-//        mPlayer.stay();
-//    }
 
 
+    public void steerLeft(float speed) {
+        playerObject.steerLeft(speed);
+    }
 
+    public void steerRight(float speed) {
+        playerObject.steerRight(speed);
+    }
+
+    public void stay() {
+        playerObject.stay();
+    }
 
 
     private void control() {
@@ -291,9 +273,11 @@ public class GameView extends SurfaceView implements Runnable {
                 //When the user releases the screen do something here
                 //boosting the space jet when screen is pressed
                 playerObject.setBoosting();
+                playerObject.fire();
                 break;
         }
         return true;
+
     }
 
 }

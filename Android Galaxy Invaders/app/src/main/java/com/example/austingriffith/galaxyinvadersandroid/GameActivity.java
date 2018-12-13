@@ -9,15 +9,23 @@ import android.hardware.SensorManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Display;
+import android.view.WindowManager;
 
 public class GameActivity extends AppCompatActivity {
 
     //declaring gameview
     private GameView spaceGame;
 
+    private float mXTemp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
 
         //Getting display object
         Display display = getWindowManager().getDefaultDisplay();
@@ -33,10 +41,14 @@ public class GameActivity extends AppCompatActivity {
         //adding it to contentview
         setContentView(spaceGame);
 
+
+//        SensorManager manager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+//        Sensor accelerometer = manager.getSensorList(Sensor.TYPE_ACCELEROMETER).get(0);
+//        manager.registerListener((SensorEventListener) this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
+
     }
 
 
-    //pausing the game when activity is in paused state
     //activity is no longer in foreground
     @Override
     protected void onPause() {
@@ -44,11 +56,39 @@ public class GameActivity extends AppCompatActivity {
         spaceGame.pause();
     }
 
-    //running the game when activity is in resumed state
+
     //activity is in foreground
     @Override
     protected void onResume() {
         super.onResume();
         spaceGame.resume();
     }
+
+
+
+    //  TRYING TO IMPLEMENT THE USE OF ACCELEROMETER IN PHONE TO CONTROL STEERING OF PLAYER OBJECT
+    //WAS NOT ABLE TO GET THIS METHOD WORKING WITHOUT CRASHING THE ACTIVITY
+
+//    @Override
+//    public void onSensorChanged(SensorEvent event) {
+//        mXTemp = event.values[0];
+//
+//        if (event.values[0] > 1){
+//            spaceGame.steerLeft(event.values[0]);
+//        }
+//        else if (event.values[0] < -1){
+//            spaceGame.steerRight(event.values[0]);
+//        }else{
+//            spaceGame.stay();
+//        }
+//    }
+//
+//    //@Override
+//    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+//
+//    }
+
+
+
+
 }

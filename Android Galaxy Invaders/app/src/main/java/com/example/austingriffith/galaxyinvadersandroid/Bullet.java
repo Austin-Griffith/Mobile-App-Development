@@ -5,79 +5,108 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 
-public class Bullet {
+import java.util.Random;
 
-//    private Bitmap mBitmap;
-//    private int mX;
-//    private int mY;
-//    private Rect mCollision;
-//    private int mScreenSizeX;
-//    private int mScreenSizeY;
-//    private boolean mIsEnemy;
-//
-//    public Bullet(Context context, int screenSizeX, int screenSizeY, int spaceShipX, int spaceShipY, Bitmap spaceShip, boolean isEnemy){
-//        mScreenSizeX = screenSizeX;
-//        mScreenSizeY = screenSizeY;
-//        mIsEnemy = isEnemy;
-//
-//        mBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.bullet);
-//        mBitmap = Bitmap.createScaledBitmap(mBitmap, mBitmap.getWidth() * 3/5, mBitmap.getHeight() * 3/5, false);
-//
-//        mX = spaceShipX + spaceShip.getWidth()/2 - mBitmap.getWidth()/2;
-//        if (mIsEnemy){
-//            mY = spaceShipY + mBitmap.getHeight() + 10;
-//        }else{
-//            mY = spaceShipY - mBitmap.getHeight() - 10;
+public class Bullet {
+    
+    private Bitmap bulletBitMap ;
+    private int x;
+    private int y;
+    private  Rect bulletCollision ;
+    private int screenSizeX;
+    private int screenSizeY;
+    private boolean mIsEnemy;
+    private int bulletSpeed = 5;
+
+
+public Bullet(Context context, int screenX, int screenY, int spaceShipX, int spaceShipY, Bitmap player, boolean isEnemy){
+
+        screenSizeX = screenX ;
+        screenSizeY = screenY ;
+        mIsEnemy = isEnemy;
+
+        bulletBitMap = BitmapFactory.decodeResource(context.getResources(), R.drawable.bullet);
+        bulletBitMap = Bitmap.createScaledBitmap(bulletBitMap, bulletBitMap.getWidth() * 3/5, bulletBitMap.getHeight() * 3/5, false);
+
+
+        x = spaceShipX + player.getWidth()/2 - bulletBitMap.getWidth()/2;
+        if (mIsEnemy){
+            y = spaceShipY + bulletBitMap.getHeight() + 10;
+        }else{
+            y = spaceShipY - bulletBitMap.getHeight() - 10;
+        }
+
+        bulletCollision = new Rect(x, y, x + bulletBitMap.getWidth(), y + bulletBitMap.getHeight());
+    }
+
+    public void update(int speed){
+        if (mIsEnemy){
+            y += bulletBitMap.getHeight() + 10;
+            bulletCollision.left = x;
+            bulletCollision.top = y;
+            bulletCollision.right = x + bulletBitMap.getWidth();
+            bulletCollision.bottom = y + bulletBitMap.getHeight();
+        }else{
+            y -= bulletBitMap.getHeight() - 10;
+            bulletCollision.left = x;
+            bulletCollision.top = y;
+            bulletCollision.right = x + bulletBitMap.getWidth();
+            bulletCollision.bottom = y + bulletBitMap.getHeight();
+        }
+
+
+        //decreasing x coordinate so that enemy will move right to left
+//        x -= playerSpeed;
+//        x -= speed;
+//        //if the enemy reaches the left edge
+//        if (x < minX - alien4.getWidth()) {
+//            //adding the enemy again to the right edge
+//            Random generator = new Random();
+//            speed = generator.nextInt(10) + 10;
+//            x = maxX;
+//            y = generator.nextInt(maxY) - alien4.getHeight() + 25;
 //        }
-//
-//        mCollision = new Rect(mX, mY, mX + mBitmap.getWidth(), mY + mBitmap.getHeight());
-//    }
-//
-//    public void update(){
-//        if (mIsEnemy){
-//            mY += mBitmap.getHeight() + 10;
-//            mCollision.left = mX;
-//            mCollision.top = mY;
-//            mCollision.right = mX + mBitmap.getWidth();
-//            mCollision.bottom = mY + mBitmap.getHeight();
-//        }else{
-//            mY -= mBitmap.getHeight() - 10;
-//            mCollision.left = mX;
-//            mCollision.top = mY;
-//            mCollision.right = mX + mBitmap.getWidth();
-//            mCollision.bottom = mY + mBitmap.getHeight();
+
+//        y -= speed ;
+//        y -= bulletSpeed;
+//        if (y < screenSizeY) {
+//            Random generator = new Random();
+//            bulletSpeed = generator.nextInt(10) + 1 ;
+//            y = screenSizeY;
 //        }
-//
-//    }
-//
-//    public boolean isEnemy() {
-//        return mIsEnemy;
-//    }
-//
-//    public Rect getCollision() {
-//        return mCollision;
-//    }
-//
-//    public void destroy(){
-//        if (mIsEnemy){
-//            mY = mScreenSizeY;
-//        }else{
-//            mY = 0 - mBitmap.getHeight();
-//        }
-//
-//    }
-//
-//    public Bitmap getBitmap() {
-//        return mBitmap;
-//    }
-//
-//    public int getX() {
-//        return mX;
-//    }
-//
-//    public int getY() {
-//        return mY;
-//    }
+
+
+    }
+
+    public boolean isEnemy() {
+        return mIsEnemy;
+    }
+
+    public Rect getCollision() {
+        return bulletCollision;
+    }
+
+    public void destroy(){
+        if (mIsEnemy){
+            y = screenSizeY + 500;
+        }else{
+            y = 500 - bulletBitMap.getHeight();
+        }
+
+    }
+
+
+    public Bitmap getBitmap() {
+        return bulletBitMap;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
 
 
 }

@@ -15,7 +15,7 @@ public class Explosion {
 
     //constructor for class
     public Explosion(Context context) {
-        //getting boom image from drawable resource
+        //getting image from drawable resource
         collideExplosion = BitmapFactory.decodeResource
                 (context.getResources(), R.drawable.explosion);
 

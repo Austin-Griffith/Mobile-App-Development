@@ -183,13 +183,10 @@ public class EnemyActivity {
 
     //public Rect getCollision() { return detectCollision; }
 //
-//    public void hit(){ destroy(); }
+    public void hit(){ destroy(); }
 //
-//    public void destroy(){ mY = mScreenSizeY + 1; }
-//
-//    public Bitmap getBitmap() {
-//        return alien4;
-//    }
+    public void destroy(){ y = mScreenSizeY + 1; }
+
 
 
 }
