@@ -24,11 +24,11 @@ import CoreMotion
 
 
 //   UPDATES TO PROJECT   //
-// get enemies to spawn from the sides of the screen //
-// implement a home screen with button to start game //
-// adding additional game timer for side enemy spawning //
-// finish implementing the CoreMotion features --> controlling player object with phone tile //
-// find collosions between player object and enemy objects
+// get enemies to spawn from the sides of the screen   -->  DONE //
+// implement a home screen with button to start game   -->  DONE //
+// adding additional game timer for side enemy spawning   -->  DONE //
+// finish implementing the CoreMotion features --> controlling player object with phone tile   -->  DONE//
+// find collosions between player object and enemy objects   -->  DONE //
 
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -58,7 +58,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    
+    //NEW VARIABLES TO DEAL WITH PLAYER MOEVMENT AND TLT OF PHONE
     // initialize variable for CoreMotion Library for tilt control of player
     var motionManager = CMMotionManager()
     var xMovement:CGFloat = 0
@@ -105,8 +105,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         score = 0
         self.addChild(scoreBanner!)
         
-        //calling addEnemy and AddSideEnemy within the gameTimer assignment values
+        //calling addEnemy within the gameTimer assignment values
         gameTimer = Timer.scheduledTimer(timeInterval: 0.75, target: self, selector: #selector(addEnemy), userInfo: nil, repeats: true)
+        
+        //NEW GAME TIMER FOR SIDE ALIENS
         gameTimer1 = Timer.scheduledTimer(timeInterval: 0.75, target: self, selector: #selector(addSideEnemy), userInfo: nil, repeats: true)
         
         
@@ -124,6 +126,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     } // end of didMove function
     
     
+    //NEW METHOD TO CONTROL THE PLAYER MOVEMENT WITH TILT OF PHONE
     //Performs any scene-specific updates that need to occur after physics simulations are performed
     override func didSimulatePhysics() {
         
@@ -142,7 +145,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     
-    
+    //METHOD TO SPAWN ALIENS FROM TOP OF SCREEN
     @objc func addEnemy() {
         
         // using gameplay kit method arrayByShufflingObjects will randomly sort objects in the array when new one is added so random enemy is added
@@ -179,6 +182,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }   //end of addEnemy function
     
     
+    //NEW METHOD TO SPAWN ALIENS FROM SIDE OF SCREEN
     // method to spawn new enemies from the sides of the screen in game
     @objc func addSideEnemy() {
         
@@ -279,7 +283,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     
+    //NEW METHOD TO DETECT COLLOSIION BETWEEN ENEMY AND PLAYER
     
+    //METHOD WORKS BUT IS COMMENTED OUT BECAUSE IT THROW AN ERROR IF A COLLOSION BETWEEN PLAYER AND ENEMY HAPPENS AT THE
+    //SAME TIME AS A BULLET AND ENEMY COLLOSIION
     func didCollide(_ contact: SKPhysicsContact) {
         
         print("INSIDE didCollide METHOD")
@@ -329,7 +336,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         fireBullets()
     }
     
+    
     // enables touch dragging of the player object
+    //LEAVING METHOD UNCOMMENTED BECAUSE ITS NICE TO BE ABLE TO DRAG PLAYER OBJECT WITH TOUCH AND TILT
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch: AnyObject in touches {
             let touchOfPoint = touch.location(in: self)
@@ -394,6 +403,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             explosion.removeFromParent()
         }
         
+        //WANT TO IMPLEMENT THIS LATER TO DECREASAE SCORE BASED ON COLLOSIONS 
         //decrease to score when alien hits the player
         //score -= 5
         

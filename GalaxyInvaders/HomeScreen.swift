@@ -6,6 +6,9 @@
 //  Copyright © 2018 Austin Griffith. All rights reserved.
 //
 
+    //NEW CLASS TO DEAL WITH GAME HOME SCREEN LANDING. HAS SCROLLING INFINATE GALAXY BACKGROUND JUST AS GAME DOES
+    //HAS BUTTON TO START THE GAME AND START THE GAMESCENE FILE
+
 import SpriteKit
 
 class HomeScreen: SKScene {
@@ -20,7 +23,7 @@ class HomeScreen: SKScene {
         galaxyBackground = self.childNode(withName: "GalaxyBackground") as! SKEmitterNode
         
         // starts the scrolling of the galaxayBackground 10 seconds early so no gaps in screen upon starting
-        galaxyBackground.advanceSimulationTime(10)
+        galaxyBackground.advanceSimulationTime(15)
         
         //withName: ""  is reffering to the name given in HomeScreen.sks
         startGameButton = self.childNode(withName: "StartGameButton") as! SKSpriteNode
@@ -50,7 +53,8 @@ class HomeScreen: SKScene {
             
             
             //Implementing Game Exit button here
-            
+            //METHOD WORKS BUT I TOOK OUT OF THE BUTTON OF SCREEN BECAUSE APPLE GUIDLINES DO NOT LIKE A BUTTON TO EXIT APPLICATION
+            //WOULDNT PASS INSPECTION FOR APP STORE IF IMPLEMENTED
 //            let end = touches.first
 //            if let position1 = start?.location(in: self)
 //            {
