@@ -23,12 +23,12 @@ public class RecievedPizzaActivity extends Activity {
         Intent intent = getIntent();
         pizzaSize1 = intent.getStringExtra("sizeOfPizza");
         pizzaSauce1 = intent.getStringExtra("sauceOnPizza");
-        Log.i("shop received", pizzaSize1);
-        Log.i("url received", pizzaSauce1);
+
 
         //update text view
         TextView messageView = findViewById(R.id.textView3);
-        messageView.setText("You should check out " + pizzaSauce1 + " and " + pizzaSauce1);
+        messageView.setText("You have chosen a " + pizzaSize1 + " with " + pizzaSauce1 + " sauce. Your pizza has the following toppings " +
+                "");
 
         //get image button
         ImageButton imageButton = findViewById(R.id.imageButton);

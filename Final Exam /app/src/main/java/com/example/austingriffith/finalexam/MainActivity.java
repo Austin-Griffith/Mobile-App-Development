@@ -37,6 +37,30 @@ public class MainActivity extends Activity {
 
     }
 
+    CheckBox hamCheckBox = findViewById(R.id.checkBox_ham);
+    Boolean ham = hamCheckBox.isChecked();
+
+    CheckBox baconCheckBox = findViewById(R.id.checkBox_bacon);
+    Boolean bacon = baconCheckBox.isChecked();
+
+    CheckBox onionsCheckBox = findViewById(R.id.checkBox_onions);
+    Boolean onions = onionsCheckBox.isChecked();
+
+    CheckBox peppersCheckBox = findViewById(R.id.checkBox_peppers);
+    Boolean peppers = peppersCheckBox.isChecked();
+
+    CheckBox pepperoniCheckBox = findViewById(R.id.checkBox_pepperoni);
+    Boolean pepperoni = pepperoniCheckBox.isChecked();
+
+    CheckBox mushroomsCheckBox = findViewById(R.id.checkBox_mushrooms);
+    Boolean mushrooms = mushroomsCheckBox.isChecked();
+
+    CheckBox sauageCheckBox = findViewById(R.id.checkBox_sausage);
+    Boolean sausage = sauageCheckBox.isChecked();
+
+    CheckBox cheeseCheckBox = findViewById(R.id.checkBox_cheese);
+    Boolean extraCheese = cheeseCheckBox.isChecked();
+
 
     private void makePizza(View view) {
 
@@ -96,32 +120,6 @@ public class MainActivity extends Activity {
             }
 
         }
-
-        CheckBox hamCheckBox = findViewById(R.id.checkBox_ham);
-        Boolean ham = hamCheckBox.isChecked();
-
-        CheckBox baconCheckBox = findViewById(R.id.checkBox_bacon);
-        Boolean bacon = baconCheckBox.isChecked();
-
-        CheckBox onionsCheckBox = findViewById(R.id.checkBox_onions);
-        Boolean onions = onionsCheckBox.isChecked();
-
-        CheckBox peppersCheckBox = findViewById(R.id.checkBox_peppers);
-        Boolean peppers = peppersCheckBox.isChecked();
-
-        CheckBox pepperoniCheckBox = findViewById(R.id.checkBox_pepperoni);
-        Boolean pepperoni = pepperoniCheckBox.isChecked();
-
-        CheckBox mushroomsCheckBox = findViewById(R.id.checkBox_mushrooms);
-        Boolean mushrooms = mushroomsCheckBox.isChecked();
-
-        CheckBox sauageCheckBox = findViewById(R.id.checkBox_sausage);
-        Boolean sausage = sauageCheckBox.isChecked();
-
-        CheckBox cheeseCheckBox = findViewById(R.id.checkBox_cheese);
-        Boolean extraCheese = cheeseCheckBox.isChecked();
-
-
 
 
 
