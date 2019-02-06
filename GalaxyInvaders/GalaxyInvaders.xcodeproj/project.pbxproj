@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		5791111A21AF580000BCBA8D /* HomeScreen.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5791111921AF580000BCBA8D /* HomeScreen.sks */; };
 		5791111C21AF5AB500BCBA8D /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5791111B21AF5AB500BCBA8D /* HomeScreen.swift */; };
-		57CCCF60219A35EA0068F30E /* bulletExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 57CCCF5F219A35EA0068F30E /* bulletExplosion.sks */; };
 		57CF12142176557D00C58ED6 /* laserFire.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 57CF12132176557D00C58ED6 /* laserFire.mp3 */; };
+		57FAA84D220B924C00E61E02 /* bulletExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 57FAA84C220B924C00E61E02 /* bulletExplosion.sks */; };
 		57FFE258216451D400D28800 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FFE257216451D400D28800 /* AppDelegate.swift */; };
 		57FFE25A216451D400D28800 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 57FFE259216451D400D28800 /* GameScene.sks */; };
 		57FFE25C216451D400D28800 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 57FFE25B216451D400D28800 /* Actions.sks */; };
@@ -29,8 +29,8 @@
 		5791111821AF579C00BCBA8D /* bulletExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = bulletExplosion.sks; path = ../../../../Desktop/bulletExplosion.sks; sourceTree = "<group>"; };
 		5791111921AF580000BCBA8D /* HomeScreen.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = HomeScreen.sks; sourceTree = "<group>"; };
 		5791111B21AF5AB500BCBA8D /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
-		57CCCF5F219A35EA0068F30E /* bulletExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = bulletExplosion.sks; path = ../../../Desktop/bulletExplosion.sks; sourceTree = "<group>"; };
 		57CF12132176557D00C58ED6 /* laserFire.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = laserFire.mp3; sourceTree = "<group>"; };
+		57FAA84C220B924C00E61E02 /* bulletExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = bulletExplosion.sks; sourceTree = "<group>"; };
 		57FFE254216451D400D28800 /* GalaxyInvaders.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GalaxyInvaders.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57FFE257216451D400D28800 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		57FFE259216451D400D28800 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -114,7 +114,7 @@
 				57FFE266216451D600D28800 /* LaunchScreen.storyboard */,
 				57FFE264216451D600D28800 /* Assets.xcassets */,
 				57FFE25B216451D400D28800 /* Actions.sks */,
-				57CCCF5F219A35EA0068F30E /* bulletExplosion.sks */,
+				57FAA84C220B924C00E61E02 /* bulletExplosion.sks */,
 				5791111621AF577400BCBA8D /* Emitters */,
 				5791111521AF575700BCBA8D /* Sounds */,
 				57FFE269216451D600D28800 /* Info.plist */,
@@ -187,10 +187,10 @@
 				57FFE265216451D600D28800 /* Assets.xcassets in Resources */,
 				57FFE2742164558F00D28800 /* FirePartical.sks in Resources */,
 				57FFE278216456CB00D28800 /* GalaxyBackground.sks in Resources */,
-				57CCCF60219A35EA0068F30E /* bulletExplosion.sks in Resources */,
 				57FFE268216451D600D28800 /* LaunchScreen.storyboard in Resources */,
 				5791111A21AF580000BCBA8D /* HomeScreen.sks in Resources */,
 				57FFE25C216451D400D28800 /* Actions.sks in Resources */,
+				57FAA84D220B924C00E61E02 /* bulletExplosion.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
